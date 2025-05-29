@@ -6,29 +6,131 @@
   <title>Projects | Technical Manager Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 1rem; background: #f9f9f9; }
-    header nav a { margin: 0 1rem; text-decoration: none; color: #004080; font-weight: bold; }
-    header nav a:hover { text-decoration: underline; }
-    .container { max-width: 900px; margin: auto; }
-    .project { display: flex; flex-wrap: wrap; margin-bottom: 3rem; background: white; border-radius: 8px; padding: 1rem; box-shadow: 0 0 10px rgba(0,0,0,0.05);}
-    .project img { max-width: 350px; width: 100%; border-radius: 8px; margin-right: 1.5rem; object-fit: contain; }
-    .project-details { flex: 1; min-width: 280px; }
-    .tags, #filter-tags { margin: 1rem 0; }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0 1rem;
+      background: #f7f9fc;
+      color: #222;
+    }
+    header {
+      background: #004080;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1rem;
+      font-weight: 600;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    h2 {
+      margin-top: 2rem;
+      color: #004080;
+    }
+    .tags-filter {
+      margin: 1rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
     .tag {
-      display: inline-block; 
-      background-color: #004080; 
-      color: white; 
-      padding: 0.3rem 0.6rem; 
-      margin: 0.2rem; 
-      border-radius: 5px;
+      padding: 0.3rem 0.7rem;
+      background: #e0e7ff;
+      border-radius: 4px;
       cursor: pointer;
       user-select: none;
       font-size: 0.9rem;
-      transition: background-color 0.3s;
+      color: #004080;
+      border: 1px solid transparent;
+      transition: background-color 0.3s, border-color 0.3s;
     }
-    .tag:hover { background-color: #0066cc; }
-    .tag.selected { background-color: #0080ff; }
-    footer { text-align: center; margin-top: 3rem; color: #777; font-size: 0.9rem; }
+    .tag.selected {
+      background: #004080;
+      color: white;
+      border-color: #003366;
+    }
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    .project {
+      display: flex;
+      flex-wrap: wrap;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+      padding: 1rem;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .project img {
+      max-width: 400px;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      flex-shrink: 0;
+      box-shadow: 0 0 8px rgb(0 64 128 / 0.2);
+    }
+    .project-content {
+      flex: 1;
+      min-width: 280px;
+    }
+    .project-title {
+      margin: 0 0 0.5rem 0;
+      color: #004080;
+    }
+    .project-tags {
+      margin-top: 0.5rem;
+    }
+    .project-tags .tag {
+      margin-right: 0.4rem;
+      font-size: 0.8rem;
+      padding: 0.2rem 0.5rem;
+      background: #cfe2ff;
+      color: #003366;
+      border-radius: 3px;
+      cursor: default;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #004080;
+      color: white;
+      margin-top: 3rem;
+    }
+    /* Markdown styles inside project content */
+    .project-content p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    .project-content h1,
+    .project-content h2,
+    .project-content h3,
+    .project-content h4,
+    .project-content h5,
+    .project-content h6 {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      color: #003366;
+    }
+    .project-content ul {
+      margin-left: 1.5rem;
+    }
   </style>
 </head>
 <body>
@@ -43,16 +145,18 @@
     </nav>
   </header>
 
-  <main class="container">
+  <main>
     <section>
       <h2>Filter Projects by Tags</h2>
-      <div id="filter-tags"></div>
+      <div id="tags-filter" class="tags-filter" aria-label="Project tags filter">
+        <!-- tags buttons added dynamically here -->
+      </div>
     </section>
 
     <section>
       <h2>Projects</h2>
-      <div id="projects-container">
-        <!-- Projects will be rendered here -->
+      <div id="projects-list" class="projects-list" aria-live="polite">
+        <!-- projects loaded dynamically here -->
       </div>
     </section>
   </main>
@@ -61,149 +165,195 @@
     <p>&copy; 2025 Technical Manager. All rights reserved.</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
-    // Your GitHub repo info
-    const username = "vuongtrinh";
-    const repo = "vuongtrinh.github.io";
-    const branch = "main";
+    // Config for GitHub repo info
+    const githubUser = "vuongtrinh";
+    const githubRepo = "vuongtrinh.github.io";
+    const githubBranch = "main";
+    const projectsPath = "projects";
 
-    // List of project folder names (you can keep this static or load dynamically if you prefer)
-    const projectFolders = [
-      "legacy-modernization-aks",
-      "iot-smart-building"
-      // add more project folders here
-    ];
-
-    let projectsData = []; // Will hold loaded project data
+    // State for projects & tags
+    let projects = [];
+    let allTags = new Set();
     let selectedTags = new Set();
 
-    // Utility: fetch JSON metadata
-    async function fetchMetadata(folder) {
-      const url = `https://raw.githubusercontent.com/${username}/${repo}/${branch}/projects/${folder}/metadata.json`;
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`Failed to load metadata for ${folder}`);
-      return response.json();
+    // DOM elements
+    const projectsListEl = document.getElementById("projects-list");
+    const tagsFilterEl = document.getElementById("tags-filter");
+
+    // Utility: Fetch JSON with error handling
+    async function fetchJSON(url) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return await res.json();
+      } catch (e) {
+        console.warn("Fetch error:", url, e);
+        return null;
+      }
     }
 
-    // Utility: fetch README.md content and convert to HTML (basic markdown)
-    async function fetchReadme(folder) {
-      const url = `https://raw.githubusercontent.com/${username}/${repo}/${branch}/projects/${folder}/README.md`;
-      const response = await fetch(url);
-      if (!response.ok) return "<p>No description available.</p>";
-      const md = await response.text();
-      return markdownToHtml(md);
+    // Utility: Fetch text with error handling
+    async function fetchText(url) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return await res.text();
+      } catch (e) {
+        console.warn("Fetch error:", url, e);
+        return "";
+      }
     }
 
-    // Basic markdown to HTML converter for demo (very limited)
-    function markdownToHtml(md) {
-      let html = md
-        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-        .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
-        .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
-        .replace(/\*(.*)\*/gim, '<em>$1</em>')
-        .replace(/\!\[(.*?)\]\((.*?)\)/gim, "<img alt='$1' src='$2' />")
-        .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2' target='_blank'>$1</a>")
-        .replace(/\n$/gim, '<br />')
-        .replace(/\n/gim, '<br />');
-      return html;
-    }
-
-    // Load all projects metadata and README, then render
+    // Load all project folders from GitHub API
     async function loadProjects() {
-      const container = document.getElementById('projects-container');
-      container.innerHTML = "<p>Loading projects...</p>";
-
-      projectsData = [];
-
-      for (const folder of projectFolders) {
-        try {
-          const metadata = await fetchMetadata(folder);
-          const readmeHtml = await fetchReadme(folder);
-
-          projectsData.push({
-            folder,
-            name: metadata.name,
-            imageFile: metadata.imageFile,
-            tags: metadata.tags,
-            descriptionHtml: readmeHtml
-          });
-        } catch (err) {
-          console.error(err);
-        }
+      // Get list of project folders under /projects
+      const apiUrl = `https://api.github.com/repos/${githubUser}/${githubRepo}/contents/${projectsPath}?ref=${githubBranch}`;
+      const folders = await fetchJSON(apiUrl);
+      if (!folders) {
+        projectsListEl.innerHTML = "<p>Failed to load projects.</p>";
+        return;
       }
 
+      // Filter only folders (type === 'dir')
+      const projectDirs = folders.filter(item => item.type === "dir");
+      const projectsLoaded = [];
+
+      for (const dir of projectDirs) {
+        const baseRawUrl = `https://raw.githubusercontent.com/${githubUser}/${githubRepo}/${githubBranch}/${projectsPath}/${dir.name}`;
+        const metadataUrl = `${baseRawUrl}/metadata.json`;
+        const readmeUrl = `${baseRawUrl}/README.md`;
+
+        // Load metadata.json
+        const metadata = await fetchJSON(metadataUrl);
+        if (!metadata) {
+          console.warn(`No metadata.json for project: ${dir.name}`);
+          continue;
+        }
+
+        // Validate metadata keys
+        if (!metadata.name || !metadata.imageFile || !Array.isArray(metadata.tags)) {
+          console.warn(`Invalid metadata.json format for project: ${dir.name}`);
+          continue;
+        }
+
+        // Load README.md markdown content
+        const markdownContent = await fetchText(readmeUrl);
+
+        // Compose project object
+        const project = {
+          id: dir.name,
+          name: metadata.name,
+          imageUrl: `${baseRawUrl}/${metadata.imageFile}`,
+          tags: metadata.tags,
+          markdown: markdownContent
+        };
+
+        // Collect all tags globally
+        metadata.tags.forEach(tag => allTags.add(tag));
+
+        projectsLoaded.push(project);
+      }
+
+      projects = projectsLoaded;
       renderTagsFilter();
       renderProjects();
     }
 
-    // Render tags filter buttons dynamically from all tags
+    // Render tags filter buttons
     function renderTagsFilter() {
-      const filterTags = document.getElementById('filter-tags');
-      filterTags.innerHTML = "";
+      tagsFilterEl.innerHTML = "";
+      // Sort tags alphabetically
+      const tagsArray = Array.from(allTags).sort((a,b) => a.localeCompare(b));
 
-      // Get all unique tags
-      const allTags = [...new Set(projectsData.flatMap(p => p.tags))].sort();
-
-      allTags.forEach(tag => {
-        const tagEl = document.createElement('span');
-        tagEl.className = 'tag';
-        tagEl.textContent = tag;
-        tagEl.onclick = () => toggleTag(tag, tagEl);
-        filterTags.appendChild(tagEl);
+      tagsArray.forEach(tag => {
+        const btn = document.createElement("button");
+        btn.textContent = tag;
+        btn.className = "tag";
+        btn.setAttribute("type", "button");
+        btn.setAttribute("aria-pressed", "false");
+        btn.addEventListener("click", () => toggleTag(tag, btn));
+        tagsFilterEl.appendChild(btn);
       });
     }
 
-    // Toggle tag selection and re-render projects
-    function toggleTag(tag, element) {
+    // Toggle tag selection
+    function toggleTag(tag, btn) {
       if (selectedTags.has(tag)) {
         selectedTags.delete(tag);
-        element.classList.remove('selected');
+        btn.classList.remove("selected");
+        btn.setAttribute("aria-pressed", "false");
       } else {
         selectedTags.add(tag);
-        element.classList.add('selected');
+        btn.classList.add("selected");
+        btn.setAttribute("aria-pressed", "true");
       }
       renderProjects();
     }
 
     // Render projects filtered by selected tags
     function renderProjects() {
-      const container = document.getElementById('projects-container');
-      container.innerHTML = "";
+      projectsListEl.innerHTML = "";
 
-      let filtered = projectsData;
+      let filteredProjects = projects;
+
       if (selectedTags.size > 0) {
-        filtered = projectsData.filter(p =>
-          [...selectedTags].every(t => p.tags.includes(t))
+        filteredProjects = projects.filter(proj =>
+          [...selectedTags].every(t => proj.tags.includes(t))
         );
       }
 
-      if (filtered.length === 0) {
-        container.innerHTML = "<p>No projects match the selected tags.</p>";
+      if (filteredProjects.length === 0) {
+        projectsListEl.innerHTML = "<p>No projects match the selected tags.</p>";
         return;
       }
 
-      filtered.forEach(p => {
-        const projectEl = document.createElement('div');
-        projectEl.className = 'project';
+      filteredProjects.forEach(proj => {
+        const projEl = document.createElement("article");
+        projEl.className = "project";
+        projEl.setAttribute("id", proj.id);
 
-        const imgSrc = `https://raw.githubusercontent.com/${username}/${repo}/${branch}/projects/${p.folder}/${p.imageFile}`;
-        projectEl.innerHTML = `
-          <img src="${imgSrc}" alt="${p.name} Image" />
-          <div class="project-details">
-            <h3>${p.name}</h3>
-            <div>${p.descriptionHtml}</div>
-            <div class="tags">
-              ${p.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}
-            </div>
-          </div>
-        `;
+        // Image part
+        const imgEl = document.createElement("img");
+        imgEl.src = proj.imageUrl;
+        imgEl.alt = `Solution Architecture for ${proj.name}`;
 
-        container.appendChild(projectEl);
+        // Content part
+        const contentEl = document.createElement("div");
+        contentEl.className = "project-content";
+
+        // Title
+        const titleEl = document.createElement("h3");
+        titleEl.className = "project-title";
+        titleEl.textContent = proj.name;
+
+        // Render markdown description safely using marked
+        const descEl = document.createElement("div");
+        descEl.innerHTML = marked.parse(proj.markdown || "");
+
+        // Tags below description (non-clickable)
+        const tagsEl = document.createElement("div");
+        tagsEl.className = "project-tags";
+        proj.tags.forEach(t => {
+          const tspan = document.createElement("span");
+          tspan.className = "tag";
+          tspan.textContent = t;
+          tagsEl.appendChild(tspan);
+        });
+
+        contentEl.appendChild(titleEl);
+        contentEl.appendChild(descEl);
+        contentEl.appendChild(tagsEl);
+
+        projEl.appendChild(imgEl);
+        projEl.appendChild(contentEl);
+
+        projectsListEl.appendChild(projEl);
       });
     }
 
+    // Initial load
     loadProjects();
   </script>
 </body>
