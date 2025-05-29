@@ -1,0 +1,5 @@
+{
+  "name": "IoT-based Smart Building Platform",
+  "imageFile": "solution-architecture-example2.png",
+  "tags": ["IoT", "MLOps", "IoT Edge", "mTLS", "Azure Key Vault", "APIM", "Private Link"]
+}
