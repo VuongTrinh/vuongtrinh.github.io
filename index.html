@@ -51,6 +51,31 @@
       0% { transform: rotate(0deg);}
       100% { transform: rotate(360deg);}
     }
+    /* Tag filter section */
+    #tag-filter {
+      margin-bottom: 2rem;
+    }
+    .tag {
+      display: inline-block;
+      background-color: #004080;
+      color: white;
+      padding: 0.3rem 0.6rem;
+      margin: 0.2rem 0.3rem 0.2rem 0;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s ease;
+      text-decoration: none;
+    }
+    .tag:hover {
+      background-color: #0066cc;
+    }
+    .tag.selected {
+      background-color: #ff6600;
+      font-weight: bold;
+    }
+    /* Projects */
     .project {
       display: flex;
       flex-wrap: wrap;
@@ -59,6 +84,7 @@
       border-radius: 8px;
       box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
       padding: 1rem;
+      transition: all 0.3s ease;
     }
     .project img {
       max-width: 400px;
@@ -76,6 +102,14 @@
     .project-details h3 {
       margin-top: 0;
       color: #004080;
+    }
+    .project-tags {
+      margin-top: 0.5rem;
+    }
+    .project-tags .tag {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.4rem;
+      cursor: pointer;
     }
     /* Markdown content styling */
     .markdown-content p {
@@ -122,77 +156,152 @@
     </nav>
   </header>
 
-  <main class="container" id="projects-container">
+  <main class="container">
+    <h2>Filter by Tags</h2>
+    <div id="tag-filter" aria-label="Filter projects by tags" role="list"></div>
+
     <h2>Projects</h2>
-    <div class="spinner" id="loading-spinner"></div>
+    <div id="projects-container">
+      <div class="spinner" id="loading-spinner"></div>
+    </div>
   </main>
 
   <footer>
     <p>&copy; 2025 Technical Manager. All rights reserved.</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
     const projects = [
       {
         name: "Legacy Modernization with Azure Kubernetes Service",
         folder: "legacy-modernization-aks",
-        imageFile: "solution-architecture-example1.png"
+        imageFile: "solution-architecture-example1.png",
+        tags: ["AKS", "CI/CD", "Cosmos DB", "Multi-Tenancy", "Row-Level Security"]
       },
       {
         name: "IoT-based Smart Building Platform",
         folder: "iot-smart-building",
-        imageFile: "solution-architecture-example2.png"
+        imageFile: "solution-architecture-example2.png",
+        tags: ["IoT", "MLOps", "IoT Edge", "mTLS", "Azure Key Vault", "APIM", "Private Link"]
       }
-      // Add more projects here with this format
+      // Add more projects here with same structure
     ];
 
     const username = "vuongtrinh";
     const repo = "vuongtrinh.github.io";
     const branch = "main";
 
-    async function loadProjects() {
-      const container = document.getElementById('projects-container');
-      const spinner = document.getElementById('loading-spinner');
+    const selectedTags = new Set();
 
-      container.innerHTML = "<h2>Projects</h2>"; // Clear loading text
+    // Collect all unique tags from projects
+    const allTags = [...new Set(projects.flatMap(p => p.tags))].sort();
+
+    const tagFilterContainer = document.getElementById('tag-filter');
+    const projectsContainer = document.getElementById('projects-container');
+    const loadingSpinner = document.getElementById('loading-spinner');
+
+    // Render tag filter buttons
+    function renderTagFilter() {
+      tagFilterContainer.innerHTML = '';
+      allTags.forEach(tag => {
+        const tagEl = document.createElement('span');
+        tagEl.classList.add('tag');
+        tagEl.textContent = tag;
+        tagEl.dataset.tag = tag;
+        if (selectedTags.has(tag)) tagEl.classList.add('selected');
+        tagEl.addEventListener('click', () => {
+          if (selectedTags.has(tag)) {
+            selectedTags.delete(tag);
+          } else {
+            selectedTags.add(tag);
+          }
+          renderTagFilter();
+          filterAndRenderProjects();
+        });
+        tagFilterContainer.appendChild(tagEl);
+      });
+    }
+
+    // Check if a project matches the selected tags (all selected tags must be present)
+    function projectMatchesTags(project) {
+      if (selectedTags.size === 0) return true; // no filter = show all
+      return [...selectedTags].every(t => project.tags.includes(t));
+    }
+
+    // Render projects based on selected tags
+    async function filterAndRenderProjects() {
+      projectsContainer.innerHTML = '';
+      if (projects.length === 0) {
+        projectsContainer.textContent = "No projects found.";
+        return;
+      }
+      loadingSpinner.style.display = 'block';
 
       for (const project of projects) {
+        if (!projectMatchesTags(project)) continue;
+
         try {
           const imageUrl = `https://raw.githubusercontent.com/${username}/${repo}/${branch}/projects/${project.folder}/${project.imageFile}`;
           const readmeUrl = `https://raw.githubusercontent.com/${username}/${repo}/${branch}/projects/${project.folder}/README.md`;
 
           const response = await fetch(readmeUrl);
-          if (!response.ok) {
-            throw new Error(`Failed to load README.md for ${project.name}`);
+          let markdown = "";
+          if (response.ok) {
+            markdown = await response.text();
+          } else {
+            markdown = "*Description not available.*";
           }
-          const markdown = await response.text();
           const html = marked.parse(markdown);
 
           const projectDiv = document.createElement('div');
           projectDiv.classList.add('project');
+
+          // Create project tags inside project card for quick filtering
+          const projectTagsHtml = project.tags.map(t => `<span class="tag" data-tag="${t}">${t}</span>`).join(' ');
 
           projectDiv.innerHTML = `
             <img src="${imageUrl}" alt="Project Image for ${project.name}" onerror="this.style.display='none'"/>
             <div class="project-details">
               <h3>${project.name}</h3>
               <div class="markdown-content">${html}</div>
+              <div class="project-tags" aria-label="Tags">${projectTagsHtml}</div>
             </div>
           `;
 
-          container.appendChild(projectDiv);
+          // Add click handlers on tags inside projects to toggle filter tag
+          projectDiv.querySelectorAll('.project-tags .tag').forEach(tagEl => {
+            tagEl.style.cursor = 'pointer';
+            tagEl.addEventListener('click', (e) => {
+              const clickedTag = e.target.dataset.tag;
+              if (selectedTags.has(clickedTag)) {
+                selectedTags.delete(clickedTag);
+              } else {
+                selectedTags.add(clickedTag);
+              }
+              renderTagFilter();
+              filterAndRenderProjects();
+              e.stopPropagation();
+            });
+          });
+
+          projectsContainer.appendChild(projectDiv);
 
         } catch (error) {
           console.error(error);
           const errorDiv = document.createElement('div');
           errorDiv.classList.add('project');
           errorDiv.innerHTML = `<h3>${project.name}</h3><p><em>Could not load project details.</em></p>`;
-          container.appendChild(errorDiv);
+          projectsContainer.appendChild(errorDiv);
         }
       }
-      spinner.style.display = "none";
+
+      loadingSpinner.style.display = 'none';
     }
 
-    loadProjects();
+    // Initial render
+    renderTagFilter();
+    filterAndRenderProjects();
   </script>
 </body>
 </html>
