@@ -2,4 +2,17 @@
   "name": "IoT-based Smart Building Platform",
   "imageFile": "solution-architecture-example2.png",
   "tags": ["IoT", "MLOps", "IoT Edge", "mTLS", "Azure Key Vault", "APIM", "Private Link"]
+  "tabs": [
+    {
+      "title": "Project Overview",
+      "file": "README.md"
+    },
+    {
+      "title": "Key Features",
+      "file": "FEATURES.md"
+    },
+    {
+      "title": "Tech Stack",
+      "file": "TECHSTACK.md"
+    }
 }
