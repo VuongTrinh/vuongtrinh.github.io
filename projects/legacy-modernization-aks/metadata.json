@@ -1,5 +1,13 @@
 {
   "name": "Legacy Modernization with Azure Kubernetes Service",
   "imageFile": "solution-architecture-example1.png",
-  "tags": ["AKS", "CI/CD", "Cosmos DB", "Multi-Tenancy", "Row-Level Security"]
+  "tags": ["AKS", "CI/CD", "Cosmos DB", "Multi-Tenancy", "Row-Level Security"],
+  "tabs": [
+    { "label": "Project Overview", "file": "README_Overview.md" },
+    { "label": "Key Features", "file": "README_KeyFeatures.md" },
+    { "label": "Solution Architecture", "file": "README_Architecture.md" },
+    { "label": "Use Cases", "file": "README_UseCases.md" },
+    { "label": "Deployment Guide", "file": "README_Deployment.md" },
+    { "label": "My Contributions", "file": "README_Contributions.md" }
+  ]
 }
