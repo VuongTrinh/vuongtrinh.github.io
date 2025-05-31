@@ -1,0 +1,5 @@
+- Reduced deployment time by **70%**, automating releases with GitOps pipelines using Flux, cutting deployment cycles from 3 hours to under 30 minutes.
+- Enabled scalable onboarding for **over 1500 tenants** (both B2B and B2C) with robust tenant isolation through automated Azure Managed Applications.
+- Designed the system to handle **10,000+ concurrent users** and process **millions of events monthly** with Azure Service Bus and Event Grid.
+- Achieved **99.95% uptime** post-migration with zero security breaches by implementing a comprehensive zero-trust architecture.
+- Decreased operational costs by **30%** by leveraging managed Azure PaaS offerings, reducing infrastructure management overhead.
