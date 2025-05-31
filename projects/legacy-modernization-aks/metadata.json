@@ -1,6 +1,6 @@
 {
   "name": "Legacy Modernization with Azure Kubernetes Service",
-  "imageFile": "solutionarchitectureexample2.png",
+  "imageFile": "solution-architecture-example1.png",
   "tags": ["AKS", "CI/CD", "Cosmos DB", "Multi-Tenancy", "Row-Level Security"],
   "tabs": [
     { "title": "Project Overview", "file": "README.md" },
