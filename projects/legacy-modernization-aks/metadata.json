@@ -4,10 +4,7 @@
   "tags": ["AKS", "CI/CD", "Cosmos DB", "Multi-Tenancy", "Row-Level Security"],
   "tabs": [
     { "title": "Project Overview", "file": "README.md" },
-    { "title": "Key Features", "file": "README_KeyFeatures.md" },
     { "title": "Solution Architecture", "file": "README_Architecture.md" },
-    { "title": "Use Cases", "file": "README_UseCases.md" },
-    { "title": "Deployment Guide", "file": "README_Deployment.md" },
     { "title": "My Contributions", "file": "README_Contributions.md" }
   ]
 }
