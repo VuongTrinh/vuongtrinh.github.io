@@ -1,0 +1,31 @@
+{
+  "title": "IoT Edge Real-time Object Detection",
+  "description": "A real-time edge AI solution for video stream processing and object detection, built using Azure Arc-enabled Kubernetes, Azure Machine Learning, and event-driven microservices.",
+  "tags": ["Edge AI", "Azure Arc", "Kubernetes", "MLOps", "IoT", "Real-time Analytics", "Microservices"],
+  "sections": [
+    {
+      "title": "Project Overview",
+      "file": "README.md"
+    },
+    {
+      "title": "Key Features",
+      "file": "README_Key_Features.md"
+    },
+    {
+      "title": "Solution Architecture",
+      "file": "README_Architecture.md"
+    },
+    {
+      "title": "Use Cases",
+      "file": "README_Use_Cases.md"
+    },
+    {
+      "title": "Deployment Guide",
+      "file": "README_Deployment.md"
+    },
+    {
+      "title": "My Contributions",
+      "file": "README_Contributions.md"
+    }
+  ]
+}
