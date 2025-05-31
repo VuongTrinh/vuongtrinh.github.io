@@ -1,12 +1,13 @@
-## Project Overview
+A cloud-native, microservices, multi-tenant Facilities Management System.
 
-This project involved migrating a legacy .NET Framework monolith into microservices on Azure Kubernetes Service (AKS). 
+## Highlights
 
-### Key Features
-- Designed CI/CD pipelines with GitHub Actions
-- Used Azure Cosmos DB for PostgreSQL with multi-tenant architecture
-- Implemented row-level security and tenant colocation for data isolation
+- Transformed a legacy monolithic system into **microservices** using **Domain-Driven Design (DDD)** principles to promote scalability, autonomy, and aligned team ownership  
+- Implemented a robust **multi-tenant architecture** supporting both B2B and B2C customer segments with strong **tenant isolation** at compute and data layers  
+- Adopted an **API-first development approach** complemented by **APIOps** to enable standardized and automated API lifecycle management  
+- Employed **GitOps with Flux, Kustomize and Helm** to achieve declarative, version-controlled infrastructure and application delivery pipelines.  
+- Enforced a comprehensive **Zero Trust** security model spanning identity, network access, and service-to-service communication.  
+- Automated tenant onboarding processes.
 
-### Technologies
-- AKS, GitHub Actions, Cosmos DB, .NET Core, Azure DevOps
+
 
