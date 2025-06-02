@@ -1,6 +1,6 @@
 {
   "name": "Smart Workplace",
-  "imageFile": "solution-architecture-example2.png",
+  "imageFile": "iot-smart-workplace-architecture.svg",
   "tags": ["IoT", "Edge", "Databricks", "MLOps", "Machine Learning", "Deep Learning", "LSTM", "XGBoost"],
   "tabs": [
     {
@@ -8,12 +8,12 @@
       "file": "README.md"
     },
     {
-      "title": "Machine Learning Pipeline",
-      "file": "README_ML.md"
-    },
-    {
       "title": "Solution Architecture",
       "file": "README_Architecture.md"
+    },
+    {
+      "title": "Machine Learning Pipeline",
+      "file": "README_ML.md"
     },
     {
       "title": "My Contributions",
