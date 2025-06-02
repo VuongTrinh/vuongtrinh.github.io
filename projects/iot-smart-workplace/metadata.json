@@ -8,6 +8,10 @@
       "file": "README.md"
     },
     {
+      "title": "Machine Learning Pipeline",
+      "file": "README_ML.md"
+    },
+    {
       "title": "Solution Architecture",
       "file": "README_Architecture.md"
     },
