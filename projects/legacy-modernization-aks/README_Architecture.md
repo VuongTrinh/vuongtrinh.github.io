@@ -1,36 +1,89 @@
-## Reliability
+# Layered Architecture: Azure Multi-Tenant SaaS Solution
 
-- Services are distributed across **multiple availability zones** using **Azure Kubernetes Service zone-redundant** with automatic failover and health checks.
-- **Azure Service Bus** decouples critical workflows, enabling retries and message durability.
-- Resource provisioning and deployment are **automated using GitOps**, reducing manual configuration drift.
-- APIs are versioned and exposed via **Azure API Management** with built-in redundancy.
+---
 
-## Security
+## 1. Client Layer (Tenant Access)
 
-- **Zero Trust architecture** is applied end-to-end using mTLS, Azure AD Workload Identity, Kubernetes's network policies, and RBAC at service level.
-- **All traffic is private**: services and APIs are only accessible through **Azure Private Link** and **internal ingress controllers**.
-- **Azure Application Gateway with WAF** provides centralized Layer 7 protection, TLS termination, and OWASP threat mitigation before traffic enters the cluster.
-- **Multi-tenant isolation** is enforced using shared-table storage with **row-level security (RLS)** and scoped tokens.
-- **Secrets and identity management** via Azure Key Vault and workload identities — no embedded secrets or certificates.
+**Purpose**: Acts as the unified entry point for tenant traffic — securely supporting both B2B (private) and B2C (public) access patterns.
 
-## Cost Optimization
+- **B2B Customers**
+  - Connect from isolated Azure subscriptions and VNets
+  - Use **Azure Private Link Endpoint (PLE)** to establish secure, private connectivity
+- **B2C Customers**
+  - Access platform via **Azure Application Gateway** with **WAF**
 
-- **Shared infrastructure** across tenants using a shared-table multi-tenant database model minimizes resource duplication.
-- Azure Cosmos DB for PostgreSQL is used with **tenant-level colocation** to balance cost and performance.
-- **Autoscaling** and **scale-to-zero** for non-critical services reduce idle costs.
+**Request Flow**:  
+Tenant request → Ingress channel (Private Link or App Gateway)
 
-## Operational Excellence
+## 2. Network Ingress & Connectivity Layer
 
-- **GitOps with Flux** for declarative deployments of both infrastructure and applications, enabling fast rollback and drift detection.
-- **CI/CD pipelines** integrate security scans, automated testing, APIOps, and multi-environment promotion.
-- **Azure Managed Applications** and the **Azure Service Catalog** enable controlled, self-service tenant provisioning with built-in policy enforcement and isolation
-- Tenant onboarding is automated using **Azure Functions**, which orchestrate provisioning workflows including resource deployment, identity setup, and policy assignment.
-- Observability through **Azure Monitor**, **Log Analytics**, and **distributed tracing** with Application Insights.
+**Purpose**: Securely terminates inbound traffic and connects it to internal workloads.
 
-## Performance Efficiency
+- **Azure Private Link Service (PLS)**
+  - Exposes APIM to B2B customers over Private Link
+  - Ensures traffic stays within Microsoft’s backbone
+- **Azure Application Gateway (WAF)**
+  - Handles TLS termination for public clients
+  - Routes requests to APIM via internal IP
 
-- **Microservices are stateless**, enabling horizontal scaling across nodes and regions.
-- Event-driven communication using **Azure Service Bus** (for commands and retries) and **Azure Event Grid** (for pub/sub events) ensures low latency and high throughput with minimal coupling.
-- **Distributed caching** and asynchronous processing improve responsiveness for end-user actions.
-- **API throttling and rate limiting** via Azure APIM ensure fair use and tenant-level performance control.
-> 📌 A detailed architecture diagram accompanies this section, visually representing service boundaries, communication patterns, and Azure service usage.
+**Request Flow**:  
+Ingress channel → **Azure API Management (APIM)** (via Internal Load Balancer)
+
+## 3. API Gateway Layer (Azure API Management)
+
+**Purpose**: Central control plane for all APIs with full multi-tenant awareness and policy enforcement.
+
+- **Azure API Management (APIM)** in **Internal VNet Mode**
+  - Not publicly accessible; receives traffic only from App Gateway or PLS
+- **Custom Tenant Resolution Policy**
+  - **B2C**: Extracts `tenant_id` from JWT token
+  - **B2B**: Identifies tenant from source IP or Private Endpoint context
+- **Tenant-Based Routing**
+  - APIM dynamically routes requests based on resolved tenant context
+
+**Request Flow**:  
+APIM → resolves tenant context → forwards request to backend (AKS)
+
+## 4. Application Layer (Microservices on AKS)
+
+**Purpose**: Hosts the multi-tenant business logic and tenant-aware services.
+
+- **Azure Kubernetes Service (AKS)**
+  - Microservices deployed in **separate namespaces**.
+  - Implements **Zero Trust Architecture**:
+    - **Service Mesh** (mTLS, traffic policies, observability)
+    - **Azure Workload Identity** for secure Azure resource access
+- **Tenant Context Propagation**
+  - Microservices receive resolved tenant ID from APIM
+  - Handle logic accordingly per tenant
+
+**Request Flow**:  
+APIM → AKS Ingress or Service → Microservice → Access data
+
+## 5. Data Layer (Tenant-Isolated Storage)
+
+**Purpose**: Provides scalable, secure data storage with strong tenant isolation.
+
+- **Azure Cosmos DB for PostgreSQL (Flexible Server)**
+  - Single database with **shared tables** containing `tenant_id`
+  - **Row-Level Security (RLS)** ensures strict data isolation
+  - **Tenant-aware sharding and colocation** improve performance
+  - **Integrated into VNet**, accessible only from AKS
+
+**Request Flow**:  
+AKS → SQL query with tenant context → RLS enforces visibility
+
+## 6. Management & Operations Layer
+
+**Purpose**: Enables secure lifecycle management, automation, and observability.
+
+- **Azure DevOps**
+  - Infrastructure as Code (IaC) and APIM configuration via APIOps
+- **Azure Monitor & Log Analytics**
+  - Centralized observability for APIM, AKS, networking, and databases
+- **Azure Key Vault**
+  - Secure storage for secrets, API keys, and certificates
+- **Azure Service Catalog + Managed Applications**
+  - Automated tenant provisioning (e.g., PLE deployment, tenant config)
+- **Private DNS & Domain Management**
+  - Ensures correct name resolution across VNet scopes
