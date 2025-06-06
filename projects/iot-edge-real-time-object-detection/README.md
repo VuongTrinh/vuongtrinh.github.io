@@ -1,8 +1,6 @@
 ## Workplace Compliance
 Real-time video analytics at the edge to detect PPE compliance, such as mask wearing, helping organizations enforce safety protocols during COVID-19. It supports use cases like automated mask detection, access control based on compliance, and real-time alerting, making it ideal for industrial and workplace safety monitoring.
 
----
-
 ## Highlights
 - Deployed on **edge-located Kubernetes clusters**, allows lifecycle management, and governance across multiple edge sites from Azure.
 - Performs **real-time object detection** using **deep learning model** to analyze live video streams directly at the edge.
