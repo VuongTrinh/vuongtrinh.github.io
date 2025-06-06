@@ -1,7 +1,7 @@
 {
   "name": "IoT Edge Real-time Object Detection",
   "imageFile": "iot-edge-real-time-object-detection.svg",
-  "tags": ["Azure", "Azure Arc", "Kubernetes", "MLOps", "IoT", "Edge", "Event-driven", "Microservices", "Kafka", "Spark", "Cassandra", "Machine Learning", "Object Detection", "DevOps", "GitOps", "ADSL2"],
+  "tags": ["Azure", "Azure Arc", "Kubernetes", "MLOps", "IoT", "Edge", "Event-driven", "Microservices", "Kafka", "Spark", "Cassandra", "Machine Learning", "Object Detection", "DevOps", "GitOps", "ADLS2"],
   "tabs": [
     {
       "title": "Project Overview",
