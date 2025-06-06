@@ -1,16 +1,18 @@
 This solution implements a full MLOps pipeline using **Azure Machine Learning** to retrain, evaluate, and deploy updated YOLO-based models for mask detection at the edge. The pipeline is tightly integrated with the edge architecture and supports continuous model improvement with robust monitoring and rollback.
 
+---
+
 ## MLOps Architecture Components
 
-| Component                          | Role                                          |
-| ---------------------------------- | --------------------------------------------- |
-| **Azure ML Pipelines**             | Automate retraining steps                     |
-| **Model Registry**                 | Track versions and metadata                   |
-| **Azure DevOps**                   | CI/CD for retraining pipeline                 |
-| **Azure Container Registry (ACR)** | Store YOLO inference containers               |
-| **Arc-enabled Kubernetes**         | Hosts edge inference containers               |
-| **Azure Monitor**                  | Monitor inference performance and model drift |
-| **Azure Data Lake Storage Gen2**   | Store datasets, outputs, and logs             |
+| Component                        | Role                                          |
+| -------------------------------- | --------------------------------------------- |
+| **Azure ML Pipelines**           | Automate retraining steps                     |
+| **Model Registry**               | Track versions and metadata                   |
+| **Azure DevOps**                 | CI/CD for retraining pipeline                 |
+| **Azure Container Registry**     | Store YOLO inference containers               |
+| **Arc-enabled Kubernetes**       | Hosts edge inference containers               |
+| **Azure Monitor**                | Monitor inference performance and model drift |
+| **Azure Data Lake Storage Gen2** | Store datasets, outputs, and logs             |
 
 ---
 
@@ -24,15 +26,6 @@ This solution implements a full MLOps pipeline using **Azure Machine Learning** 
 
 ### 2. Azure ML Training Pipeline
 
-## Retraining Triggers
-
-| Trigger Type        | Example                                    |
-| ------------------- | ------------------------------------------ |
-| **Scheduled**       | Weekly retraining jobs                     |
-| **Drift Detection** | Significant drop in accuracy or confidence |
-| **Data Thresholds** | New labeled data > N examples              |
-| **Manual**          | Human-in-the-loop retraining trigger       |
-
 The pipeline is orchestrated in **Azure Machine Learning** and includes:
 
 | Step                   | Description                                        |
@@ -42,6 +35,15 @@ The pipeline is orchestrated in **Azure Machine Learning** and includes:
 | **Evaluation**         | Compute mAP, precision, recall, and loss metrics   |
 | **Model Registration** | Register trained model in Azure ML Model Registry  |
 | **Approval Gate**      | Approvement before deployment                      |
+
+Retraining Triggers
+
+| Trigger Type        | Example                                    |
+| ------------------- | ------------------------------------------ |
+| **Scheduled**       | Weekly retraining jobs                     |
+| **Drift Detection** | Significant drop in accuracy or confidence |
+| **Data Thresholds** | New labeled data > N examples              |
+| **Manual**          | Human-in-the-loop retraining trigger       |
 
 ### 3. Model Deployment to Edge
 
