@@ -1,6 +1,6 @@
 {
   "name": "IoT Edge Real-time Object Detection",
-  "imageFile": "solution-architecture-example2.png",
+  "imageFile": "iot-edge-real-time-object-detection.svg",
   "tags": ["Edge AI", "Azure Arc", "Kubernetes", "MLOps", "IoT", "Real-time Analytics", "Microservices"],
   "tabs": [
     {
@@ -10,6 +10,10 @@
     {
       "title": "Solution Architecture",
       "file": "README_Architecture.md"
+    },
+     {
+      "title": "Machine Learning",
+      "file": "README_ML.md"
     },
     {
       "title": "My Contributions",
