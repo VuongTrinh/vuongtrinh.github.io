@@ -1,14 +1,14 @@
 {
   "name": "Smart Workplace",
   "imageFile": "iot-smart-workplace-architecture.svg",
-  "tags": ["IoT", "Edge", "Databricks", "MLOps", "Machine Learning", "Deep Learning", "LSTM", "XGBoost"],
+  "tags": ["Azure", "IoT", "Edge", "Databricks", "MLOps", "Machine Learning", "Deep Learning", "LSTM", "XGBoost", "LoraWan", "Azure IoT Edge", "Azure IoT Hub", "Azure DPS", "Azure Event Hub", "Azure Data Explorer", "Azure App Service", "Azure Function", "Azure Application Gateway", "Serverless", "Multi-tenant", "Lambda Architecture"],
   "tabs": [
     {
       "title": "Project Overview",
       "file": "README.md"
     },
     {
-      "title": "Solution Architecture",
+      "title": "Architecture",
       "file": "README_Architecture.md"
     },
     {
