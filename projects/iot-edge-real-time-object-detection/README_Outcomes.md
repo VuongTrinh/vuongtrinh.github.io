@@ -1,5 +1,3 @@
-## Design Outcomes
-
 This edge-based video analytics solution delivers the following key outcomes:
 
 - **Low Latency Compliance Enforcement**:  
