@@ -1,7 +1,6 @@
-A cloud-native, microservices, multi-tenant Facilities Management System.
-
+## Facilities Management System
+A modern, cloud-native multi-tenant system designed to serve both **B2B** and **B2C** customers through a unified cloud platform.
 ## Highlights
-
 - Transformed a legacy monolithic system into **microservices** using **Domain-Driven Design (DDD)** principles to promote scalability, autonomy, and aligned team ownership  
 - Implemented a robust **multi-tenant architecture** supporting both B2B and B2C customer segments with strong **tenant isolation** at compute and data layers  
 - Adopted an **API-first development approach** complemented by **APIOps** to enable standardized and automated API lifecycle management  
