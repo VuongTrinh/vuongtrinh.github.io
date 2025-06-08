@@ -1,0 +1,16 @@
+- **Modular Ecommerce Extensions:** Built extensible backend modules for catalog management, shopping cart workflows, and order processing. Designed these components for easy integration and future scalability without impacting the core CMS framework.
+- **Robust Payment Gateway Integrations:** Developed resilient payment workflows supporting multiple gateways, with comprehensive error handling and transaction management for reliable checkout.
+- **Event-Driven Data Synchronization:** Used domain events to synchronize data between Episerver CMS and ecommerce models, ensuring consistent content and commerce experiences.
+- **Caching Strategies for Performance:** Employed Redis and in-memory caches to optimize performance and reduce database load in high-traffic scenarios.
+- **Fast Product Search with ElasticSearch:** Architected and integrated ElasticSearch to deliver highly performant, scalable search capabilities. Designed custom indexing and query optimizations to handle complex product data and faceted filters, enabling users to find products quickly and accurately.
+- **Personalization Engine**:
+  - User Profiles & Behavior: Tracks visitor data such as browsing history, location, device, and interaction patterns.
+  - Segments & Personas: Groups users into segments (e.g., “returning customers,” “high spenders”) based on attributes or behavior.
+  - Campaigns & Rules: Defines personalization rules and campaigns that serve specific content or product recommendations to targeted segments.
+  - Content Targeting: Dynamically displays personalized content blocks, banners, or product listings on webpages.
+- **Personalized Recommendations and Promotions:** Combined personalization engine with search results to provide tailored product recommendations and dynamic promotions, enhancing user engagement and driving conversion.
+  - Segment-Aware Queries: The personalization engine can pass segment or user profile info (like interests, location, or browsing behavior) as parameters or filters to ES queries, narrowing search results to relevant subsets.
+  - Boosting & Scoring: ES query scoring can be customized dynamically to boost products or content that match personalization rules or user preferences.
+  - Dynamic Faceting: Faceted filters can be adjusted based on user segments, showing more relevant categories or product attributes.
+  - Content Enrichment: Product documents indexed in ES can include metadata fields related to personalization (e.g., tags, popularity, recommended for segment X) to support more granular filtering and sorting.
+  - Real-Time Updates: When personalization rules or user segments update, related ES indices can be refreshed or reindexed through event-driven mechanisms to keep search results aligned with current personalization logic. 
