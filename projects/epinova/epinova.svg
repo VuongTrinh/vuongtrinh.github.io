@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="431pt" height="540pt" viewBox="0.00 0.00 431.39 539.80">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 535.8)">
+<title>EpinovaEcommerceFlow</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-535.8 427.39,-535.8 427.39,4 -4,4"/>
+<!-- Customer -->
+<g id="node1" class="node">
+<title>Customer</title>
+<path fill="none" stroke="black" d="M88.94,-531.8C88.94,-531.8 54.16,-531.8 54.16,-531.8 48.16,-531.8 42.16,-525.8 42.16,-519.8 42.16,-519.8 42.16,-507.8 42.16,-507.8 42.16,-501.8 48.16,-495.8 54.16,-495.8 54.16,-495.8 88.94,-495.8 88.94,-495.8 94.94,-495.8 100.94,-501.8 100.94,-507.8 100.94,-507.8 100.94,-519.8 100.94,-519.8 100.94,-525.8 94.94,-531.8 88.94,-531.8"/>
+<text text-anchor="middle" x="71.55" y="-510.8" font-family="Segoe UI" font-size="10.00">Customers</text>
+</g>
+<!-- SearchUI -->
+<g id="node2" class="node">
+<title>SearchUI</title>
+<path fill="none" stroke="black" d="M109.35,-458.8C109.35,-458.8 33.75,-458.8 33.75,-458.8 27.75,-458.8 21.75,-452.8 21.75,-446.8 21.75,-446.8 21.75,-434.8 21.75,-434.8 21.75,-428.8 27.75,-422.8 33.75,-422.8 33.75,-422.8 109.35,-422.8 109.35,-422.8 115.35,-422.8 121.35,-428.8 121.35,-434.8 121.35,-434.8 121.35,-446.8 121.35,-446.8 121.35,-452.8 115.35,-458.8 109.35,-458.8"/>
+<text text-anchor="middle" x="71.55" y="-443.8" font-family="Segoe UI" font-size="10.00">Search Input UI</text>
+<text text-anchor="middle" x="71.55" y="-431.8" font-family="Segoe UI" font-size="10.00">(Search Box, Filters)</text>
+</g>
+<!-- Customer&#45;&gt;SearchUI -->
+<g id="edge1" class="edge">
+<title>Customer-&gt;SearchUI</title>
+<path fill="none" stroke="black" d="M71.55,-495.61C71.55,-488.03 71.55,-478.9 71.55,-470.34"/>
+<polygon fill="black" stroke="black" points="75.05,-470.34 71.55,-460.34 68.05,-470.34 75.05,-470.34"/>
+</g>
+<!-- ElasticSearch -->
+<g id="node3" class="node">
+<title>ElasticSearch</title>
+<path fill="none" stroke="black" d="M123.92,-379.8C123.92,-379.8 19.18,-379.8 19.18,-379.8 13.18,-379.8 7.18,-373.8 7.18,-367.8 7.18,-367.8 7.18,-347.8 7.18,-347.8 7.18,-341.8 13.18,-335.8 19.18,-335.8 19.18,-335.8 123.92,-335.8 123.92,-335.8 129.92,-335.8 135.92,-341.8 135.92,-347.8 135.92,-347.8 135.92,-367.8 135.92,-367.8 135.92,-373.8 129.92,-379.8 123.92,-379.8"/>
+<text text-anchor="middle" x="71.55" y="-366.8" font-family="Segoe UI" font-size="10.00">ElasticSearch Query Engine</text>
+<text text-anchor="middle" x="71.55" y="-354.8" font-family="Segoe UI" font-size="10.00">- Full-text Search</text>
+<text text-anchor="middle" x="71.55" y="-342.8" font-family="Segoe UI" font-size="10.00">- Faceted Filtering</text>
+</g>
+<!-- SearchUI&#45;&gt;ElasticSearch -->
+<g id="edge2" class="edge">
+<title>SearchUI-&gt;ElasticSearch</title>
+<path fill="none" stroke="black" d="M71.55,-422.62C71.55,-413.65 71.55,-402.35 71.55,-391.77"/>
+<polygon fill="black" stroke="black" points="75.05,-391.8 71.55,-381.8 68.05,-391.8 75.05,-391.8"/>
+</g>
+<!-- ProductIndex -->
+<g id="node4" class="node">
+<title>ProductIndex</title>
+<path fill="none" stroke="black" d="M411.39,-375.8C411.39,-375.8 309.71,-375.8 309.71,-375.8 303.71,-375.8 297.71,-369.8 297.71,-363.8 297.71,-363.8 297.71,-351.8 297.71,-351.8 297.71,-345.8 303.71,-339.8 309.71,-339.8 309.71,-339.8 411.39,-339.8 411.39,-339.8 417.39,-339.8 423.39,-345.8 423.39,-351.8 423.39,-351.8 423.39,-363.8 423.39,-363.8 423.39,-369.8 417.39,-375.8 411.39,-375.8"/>
+<text text-anchor="middle" x="360.55" y="-360.8" font-family="Segoe UI" font-size="10.00">Product Index</text>
+<text text-anchor="middle" x="360.55" y="-348.8" font-family="Segoe UI" font-size="10.00">(Updated by Event Stream)</text>
+</g>
+<!-- ElasticSearch&#45;&gt;ProductIndex -->
+<g id="edge3" class="edge">
+<title>ElasticSearch-&gt;ProductIndex</title>
+<path fill="none" stroke="black" d="M115.3,-380.29C131.58,-387.49 150.49,-394.53 168.55,-398.13 218.24,-408.05 233.32,-410.11 282.55,-398.13 296.44,-394.76 310.61,-388.44 323,-381.8"/>
+<polygon fill="black" stroke="black" points="324.64,-384.9 331.63,-376.94 321.2,-378.8 324.64,-384.9"/>
+</g>
+<!-- Personalization -->
+<g id="node5" class="node">
+<title>Personalization</title>
+<path fill="none" stroke="black" d="M267.79,-385.8C267.79,-385.8 183.31,-385.8 183.31,-385.8 177.31,-385.8 171.31,-379.8 171.31,-373.8 171.31,-373.8 171.31,-341.8 171.31,-341.8 171.31,-335.8 177.31,-329.8 183.31,-329.8 183.31,-329.8 267.79,-329.8 267.79,-329.8 273.79,-329.8 279.79,-335.8 279.79,-341.8 279.79,-341.8 279.79,-373.8 279.79,-373.8 279.79,-379.8 273.79,-385.8 267.79,-385.8"/>
+<text text-anchor="middle" x="225.55" y="-372.8" font-family="Segoe UI" font-size="10.00">Personalization Engine</text>
+<text text-anchor="middle" x="225.55" y="-360.8" font-family="Segoe UI" font-size="10.00">(Episerver CMS)</text>
+<text text-anchor="middle" x="225.55" y="-348.8" font-family="Segoe UI" font-size="10.00">- User Segments</text>
+<text text-anchor="middle" x="225.55" y="-336.8" font-family="Segoe UI" font-size="10.00">- Boosts/Filters</text>
+</g>
+<!-- ElasticSearch&#45;&gt;Personalization -->
+<g id="edge4" class="edge">
+<title>ElasticSearch-&gt;Personalization</title>
+<path fill="none" stroke="black" d="M136.22,-341.72C144.03,-341.19 151.85,-341.16 159.66,-341.64"/>
+<polygon fill="black" stroke="black" points="159.32,-345.13 169.61,-342.58 159.98,-338.16 159.32,-345.13"/>
+</g>
+<!-- UIDisplay -->
+<g id="node7" class="node">
+<title>UIDisplay</title>
+<path fill="none" stroke="black" d="M216.68,-292.8C216.68,-292.8 144.42,-292.8 144.42,-292.8 138.42,-292.8 132.42,-286.8 132.42,-280.8 132.42,-280.8 132.42,-248.8 132.42,-248.8 132.42,-242.8 138.42,-236.8 144.42,-236.8 144.42,-236.8 216.68,-236.8 216.68,-236.8 222.68,-236.8 228.68,-242.8 228.68,-248.8 228.68,-248.8 228.68,-280.8 228.68,-280.8 228.68,-286.8 222.68,-292.8 216.68,-292.8"/>
+<text text-anchor="middle" x="180.55" y="-279.8" font-family="Segoe UI" font-size="10.00">UI Displays</text>
+<text text-anchor="middle" x="180.55" y="-267.8" font-family="Segoe UI" font-size="10.00">- Search Results</text>
+<text text-anchor="middle" x="180.55" y="-255.8" font-family="Segoe UI" font-size="10.00">- Recommendations</text>
+<text text-anchor="middle" x="180.55" y="-243.8" font-family="Segoe UI" font-size="10.00">- Promotions</text>
+</g>
+<!-- ElasticSearch&#45;&gt;UIDisplay -->
+<g id="edge8" class="edge">
+<title>ElasticSearch-&gt;UIDisplay</title>
+<path fill="none" stroke="black" d="M97.1,-335.46C109.61,-325.02 124.98,-312.19 139.11,-300.4"/>
+<polygon fill="black" stroke="black" points="141.11,-303.28 146.55,-294.19 136.63,-297.91 141.11,-303.28"/>
+</g>
+<!-- ProductIndex&#45;&gt;ElasticSearch -->
+<g id="edge5" class="edge">
+<title>ProductIndex-&gt;ElasticSearch</title>
+<path fill="none" stroke="black" d="M339.05,-376.07C322.99,-388.46 299.87,-403.76 276.55,-410.47 232.98,-423 218.62,-421.08 174.55,-410.47 153.79,-405.47 132.51,-395.54 114.72,-385.63"/>
+<polygon fill="black" stroke="black" points="116.95,-382.88 106.54,-380.92 113.46,-388.94 116.95,-382.88"/>
+</g>
+<!-- Personalization&#45;&gt;ElasticSearch -->
+<g id="edge6" class="edge">
+<title>Personalization-&gt;ElasticSearch</title>
+<path fill="none" stroke="black" d="M171.11,-372.88C163.3,-373.86 155.48,-374.34 147.67,-374.3"/>
+<polygon fill="black" stroke="black" points="147.85,-370.8 137.73,-373.93 147.59,-377.8 147.85,-370.8"/>
+</g>
+<!-- DynamicContent -->
+<g id="node6" class="node">
+<title>DynamicContent</title>
+<path fill="none" stroke="black" d="M85.1,-282.8C85.1,-282.8 12,-282.8 12,-282.8 6,-282.8 0,-276.8 0,-270.8 0,-270.8 0,-258.8 0,-258.8 0,-252.8 6,-246.8 12,-246.8 12,-246.8 85.1,-246.8 85.1,-246.8 91.1,-246.8 97.1,-252.8 97.1,-258.8 97.1,-258.8 97.1,-270.8 97.1,-270.8 97.1,-276.8 91.1,-282.8 85.1,-282.8"/>
+<text text-anchor="middle" x="48.55" y="-267.8" font-family="Segoe UI" font-size="10.00">Dynamic Content &amp;</text>
+<text text-anchor="middle" x="48.55" y="-255.8" font-family="Segoe UI" font-size="10.00">Promotional Blocks</text>
+</g>
+<!-- Personalization&#45;&gt;DynamicContent -->
+<g id="edge7" class="edge">
+<title>Personalization-&gt;DynamicContent</title>
+<path fill="none" stroke="black" d="M172.44,-329.5C146.87,-316.35 116.58,-300.78 92.35,-288.32"/>
+<polygon fill="black" stroke="black" points="94.21,-285.34 83.71,-283.88 91.01,-291.56 94.21,-285.34"/>
+</g>
+<!-- DynamicContent&#45;&gt;UIDisplay -->
+<g id="edge9" class="edge">
+<title>DynamicContent-&gt;UIDisplay</title>
+<path fill="none" stroke="black" d="M97.53,-264.8C105.3,-264.8 113.08,-264.8 120.85,-264.8"/>
+<polygon fill="black" stroke="black" points="120.72,-268.3 130.72,-264.8 120.72,-261.3 120.72,-268.3"/>
+</g>
+<!-- CartCheckout -->
+<g id="node8" class="node">
+<title>CartCheckout</title>
+<path fill="none" stroke="black" d="M132.13,-199.8C132.13,-199.8 30.97,-199.8 30.97,-199.8 24.97,-199.8 18.97,-193.8 18.97,-187.8 18.97,-187.8 18.97,-175.8 18.97,-175.8 18.97,-169.8 24.97,-163.8 30.97,-163.8 30.97,-163.8 132.13,-163.8 132.13,-163.8 138.13,-163.8 144.13,-169.8 144.13,-175.8 144.13,-175.8 144.13,-187.8 144.13,-187.8 144.13,-193.8 138.13,-199.8 132.13,-199.8"/>
+<text text-anchor="middle" x="81.55" y="-184.8" font-family="Segoe UI" font-size="10.00">Shopping Cart &amp; Checkout</text>
+<text text-anchor="middle" x="81.55" y="-172.8" font-family="Segoe UI" font-size="10.00">(Fast via Cache)</text>
+</g>
+<!-- UIDisplay&#45;&gt;CartCheckout -->
+<g id="edge10" class="edge">
+<title>UIDisplay-&gt;CartCheckout</title>
+<path fill="none" stroke="black" d="M147.03,-236.38C135.52,-226.96 122.72,-216.49 111.52,-207.32"/>
+<polygon fill="black" stroke="black" points="114.05,-204.87 104.1,-201.25 109.62,-210.29 114.05,-204.87"/>
+</g>
+<!-- EventStream -->
+<g id="node10" class="node">
+<title>EventStream</title>
+<path fill="none" stroke="black" d="M223.42,-117C223.42,-117 143.68,-117 143.68,-117 137.68,-117 131.68,-111 131.68,-105 131.68,-105 131.68,-85 131.68,-85 131.68,-79 137.68,-73 143.68,-73 143.68,-73 223.42,-73 223.42,-73 229.42,-73 235.42,-79 235.42,-85 235.42,-85 235.42,-105 235.42,-105 235.42,-111 229.42,-117 223.42,-117"/>
+<text text-anchor="middle" x="183.55" y="-104" font-family="Segoe UI" font-size="10.00">Event Stream (Kafka)</text>
+<text text-anchor="middle" x="183.55" y="-92" font-family="Segoe UI" font-size="10.00">- User Actions</text>
+<text text-anchor="middle" x="183.55" y="-80" font-family="Segoe UI" font-size="10.00">- Catalog Updates</text>
+</g>
+<!-- UIDisplay&#45;&gt;EventStream -->
+<g id="edge12" class="edge">
+<title>UIDisplay-&gt;EventStream</title>
+<path fill="none" stroke="black" d="M181.04,-236.47C181.57,-206.99 182.4,-160.06 182.97,-128.66"/>
+<polygon fill="black" stroke="black" points="186.46,-129.03 183.14,-118.97 179.46,-128.9 186.46,-129.03"/>
+<text text-anchor="middle" x="215.2" y="-179.1" font-family="Times,serif" font-size="9.00">Interaction Events</text>
+</g>
+<!-- PaymentGateway -->
+<g id="node9" class="node">
+<title>PaymentGateway</title>
+<path fill="none" stroke="black" d="M102.01,-113C102.01,-113 33.09,-113 33.09,-113 27.09,-113 21.09,-107 21.09,-101 21.09,-101 21.09,-89 21.09,-89 21.09,-83 27.09,-77 33.09,-77 33.09,-77 102.01,-77 102.01,-77 108.01,-77 114.01,-83 114.01,-89 114.01,-89 114.01,-101 114.01,-101 114.01,-107 108.01,-113 102.01,-113"/>
+<text text-anchor="middle" x="67.55" y="-92" font-family="Segoe UI" font-size="10.00">Payment Gateways</text>
+</g>
+<!-- CartCheckout&#45;&gt;PaymentGateway -->
+<g id="edge11" class="edge">
+<title>CartCheckout-&gt;PaymentGateway</title>
+<path fill="none" stroke="black" d="M78.72,-163.64C76.87,-152.45 74.41,-137.57 72.27,-124.62"/>
+<polygon fill="black" stroke="black" points="75.76,-124.22 70.67,-114.92 68.85,-125.36 75.76,-124.22"/>
+</g>
+<!-- CartCheckout&#45;&gt;EventStream -->
+<g id="edge13" class="edge">
+<title>CartCheckout-&gt;EventStream</title>
+<path fill="none" stroke="black" d="M88.32,-163.53C92.66,-154.19 99.03,-142.97 107.32,-135 111.74,-130.75 116.71,-126.86 121.95,-123.32"/>
+<polygon fill="black" stroke="black" points="123.66,-126.37 130.31,-118.12 119.97,-120.43 123.66,-126.37"/>
+<text text-anchor="middle" x="136.93" y="-137.7" font-family="Times,serif" font-size="9.00">Purchase Events</text>
+</g>
+<!-- UpdateIndexProfile -->
+<g id="node11" class="node">
+<title>UpdateIndexProfile</title>
+<path fill="none" stroke="black" d="M323.64,-36C323.64,-36 225.46,-36 225.46,-36 219.46,-36 213.46,-30 213.46,-24 213.46,-24 213.46,-12 213.46,-12 213.46,-6 219.46,0 225.46,0 225.46,0 323.64,0 323.64,0 329.64,0 335.64,-6 335.64,-12 335.64,-12 335.64,-24 335.64,-24 335.64,-30 329.64,-36 323.64,-36"/>
+<text text-anchor="middle" x="274.55" y="-15" font-family="Segoe UI" font-size="10.00">Profile + ES Index Update</text>
+</g>
+<!-- EventStream&#45;&gt;UpdateIndexProfile -->
+<g id="edge14" class="edge">
+<title>EventStream-&gt;UpdateIndexProfile</title>
+<path fill="none" stroke="black" d="M209.38,-72.71C220.41,-63.62 233.35,-52.96 244.78,-43.54"/>
+<polygon fill="black" stroke="black" points="246.9,-46.33 252.39,-37.27 242.44,-40.93 246.9,-46.33"/>
+</g>
+<!-- UpdateIndexProfile&#45;&gt;ProductIndex -->
+<g id="edge15" class="edge">
+<title>UpdateIndexProfile-&gt;ProductIndex</title>
+<path fill="none" stroke="black" d="M289.13,-36.25C299.85,-50.71 312.55,-72.4 312.55,-94 312.55,-265.8 312.55,-265.8 312.55,-265.8 312.55,-289.61 325.57,-313.3 338.04,-330.54"/>
+<polygon fill="black" stroke="black" points="335.06,-332.39 343.91,-338.21 340.61,-328.14 335.06,-332.39"/>
+</g>
+<!-- UpdateIndexProfile&#45;&gt;Personalization -->
+<g id="edge16" class="edge">
+<title>UpdateIndexProfile-&gt;Personalization</title>
+<path fill="none" stroke="black" d="M274.55,-36.28C274.55,-51.48 274.55,-74.21 274.55,-94 274.55,-265.8 274.55,-265.8 274.55,-265.8 274.55,-285.12 265.88,-304.28 255.84,-320"/>
+<polygon fill="black" stroke="black" points="253.08,-317.84 250.33,-328.07 258.86,-321.79 253.08,-317.84"/>
+</g>
+</g>
+</svg>
