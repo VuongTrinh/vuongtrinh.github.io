@@ -4,7 +4,7 @@
   "tags": ["Azure", "Multi-Tenancy", "Azure Function", "Azure Event Hub", "Azure Stream Analytics", "ADLS", "Azure Synapse Analytics", "Azure Machine Learning", "Azure Redis Cache", "Machine Learning", "Recommendation System", "ALS"],
   "tabs": [
     { "title": "Project Overview", "file": "README.md" },
-    { "title": "Technical Highlights", "file": "README_TechnicalHighlights.md", "hash": "claremontRS-technicalhighlights },
+    { "title": "Technical Highlights", "file": "README_TechnicalHighlights.md", "hash": "claremontRS-technicalhighlights" },
     { "title": "Machine Learning", "file": "README_ML.md" },
     { "title": "Achievements", "file": "README_Achievements.md" }
   ]
