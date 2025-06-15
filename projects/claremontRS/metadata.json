@@ -5,6 +5,7 @@
   "tabs": [
     { "title": "Project Overview", "file": "README.md" },
     { "title": "Technical Highlights", "file": "README_TechnicalHighlights.md" },
-    { "title": "Machine Learning", "file": "README_ML.md" }
+    { "title": "Machine Learning", "file": "README_ML.md" },
+    { "title": "Achievements", "file": "README_Achievements.md" }
   ]
 }
