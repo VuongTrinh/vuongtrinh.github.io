@@ -1,6 +1,7 @@
 The architecture implements an end-to-end feedback-to-recommendation lifecycle tailored for multi-tenant e-commerce platforms.
 
 ## High-Level Flow
+
 1. **User Interaction**
    - Front-end app captures behavior events (view, cart, purchase,...)
    - Events are POSTed via Azure Function with SAS token validation
@@ -24,7 +25,7 @@ The architecture implements an end-to-end feedback-to-recommendation lifecycle t
 - **Managed Identity**: Used for secure access between services
 - **Azure Automation Runbook**: Rotates secrets and triggers retraining workflows
 
-## ⚙️ Scalability & Isolation
+## Scalability & Isolation
 
 | Layer           | Multi-Tenant Strategy                                 |
 | --------------- | ----------------------------------------------------- |
