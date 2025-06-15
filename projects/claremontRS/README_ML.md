@@ -6,11 +6,11 @@ ALS is a matrix factorization algorithm that learns latent features for users an
 
 ### Event Weighting (Implicit Feedback)
 
-| Event Type  | Weight |
-| ----------- | ------ |
-| View        | 1      |
-| Add to Cart | 3      |
-| Purchase    | 5      |
+| Event Type        | Weight |
+| -----------       | ------ |
+| View              | 1      |
+| Add to Cart       | 3      |
+| Purchase          | 5      |
 
 These weights are applied in **Azure Stream Analytics**, before storing events in **Azure Data Lake Storage (ADLS)** in Parquet format.
 
@@ -32,11 +32,11 @@ These weights are applied in **Azure Stream Analytics**, before storing events i
 4. **Model Promotion & Evaluation**
 After training, models are evaluated using the following metrics:
 
-| Metric                        | Description                                                 |
-| ----------------------------- | ----------------------------------------------------------- |
-| RMSE (Root Mean Square Error) | Measures accuracy of predicted interaction scores           |
-| Mean Average Precision (MAP)  | Evaluates ranking quality of top-N recommendations          |
-| Coverage                      | Measures diversity and item distribution in recommendations |
+| Metric                              | Description                                                 |
+| -----------------------------       | ----------------------------------------------------------- |
+| RMSE (Root Mean Square Error)       | Measures accuracy of predicted interaction scores           |
+| Mean Average Precision (MAP)        | Evaluates ranking quality of top-N recommendations          |
+| Coverage                            | Measures diversity and item distribution in recommendations |
 
 Promotion logic is as follows:
 
@@ -47,24 +47,24 @@ Promotion logic is as follows:
    - Promoted model vectors are pushed to **Azure Redis Cache** under tenant-specific namespaces.
    - The application queries Redis for real-time recommendations.
 
-## ⚙️ Model Parallelism & Scalability
+## Model Parallelism & Scalability
 - A pool of parallel training jobs (e.g., max 100 concurrent jobs) is maintained to prevent compute overcommitment.
 - Tenants are processed in batches based on priority or data availability.
 
-| Feature           | Strategy                                  |
-| ----------------- | ----------------------------------------- |
-| Job Distribution  | Batched training via Azure ML SDK         |
-| Compute Isolation | Auto-scale Azure ML compute clusters      |
-| Model Reuse       | Warm-start via previous model version     |
-| Failover Handling | Retry logic + fallback to last good model |
+| Feature                 | Strategy                                  |
+| -----------------       | ----------------------------------------- |
+| Job Distribution        | Batched training via Azure ML SDK         |
+| Compute Isolation       | Auto-scale Azure ML compute clusters      |
+| Model Reuse             | Warm-start via previous model version     |
+| Failover Handling       | Retry logic + fallback to last good model |
 
-## 🧊 Cold Start Strategy
+## Cold Start Strategy
 
 Tenants or users without sufficient interaction data are served using **vector similarity search**. This uses Lucene-style indexing based on item metadata (category, brand, etc.).
 
 When user data becomes sufficient, the system automatically switches to ALS-based personalized recommendations.
 
-## 🔐 Security
+## Security
 - Azure ML uses **Managed Identity** to securely access:
   - ADLS for training data
   - Table Storage for model output
