@@ -8,7 +8,7 @@ As CTO and co-founder, I led the end-to-end technical strategy, platform design,
 - **Security**: Enforce strong tenant isolation, secure identities, and encrypted communication.
 - **Observability & Billing**: Track resource usage per tenant to support tiered billing.
 
-  ## Solution Tiers
+## Solution Tiers
 - **Starter**: Shared app and shared database; ideal for early-stage businesses.
 - **Growth**: Shared app, dedicated database; suited for growing brands with more data volume.
 - **Enterprise**: Dedicated app and database; full isolation for performance, compliance, and customization.
