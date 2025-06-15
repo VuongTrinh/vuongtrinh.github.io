@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="358pt" height="851pt" viewBox="0.00 0.00 358.09 851.06">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 847.06)">
+<title>ALS_Recommender_Pipeline</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-847.06 354.09,-847.06 354.09,4 -4,4"/>
+<!-- UserEvent -->
+<g id="node1" class="node">
+<title>UserEvent</title>
+<ellipse fill="lightgrey" stroke="lightgrey" cx="121.89" cy="-813.65" rx="121.89" ry="29.42"/>
+<text text-anchor="middle" x="121.89" y="-817.85" font-family="Arial" font-size="14.00">User Events</text>
+<text text-anchor="middle" x="121.89" y="-801.05" font-family="Arial" font-size="14.00">(View, Cart, Purchase,...)</text>
+</g>
+<!-- FeedbackAPI -->
+<g id="node2" class="node">
+<title>FeedbackAPI</title>
+<polygon fill="lightblue" stroke="lightblue" points="178.52,-747.23 65.26,-747.23 65.26,-705.63 178.52,-705.63 178.52,-747.23"/>
+<text text-anchor="middle" x="121.89" y="-730.63" font-family="Arial" font-size="14.00">Azure Function</text>
+<text text-anchor="middle" x="121.89" y="-713.83" font-family="Arial" font-size="14.00">(Feedback API)</text>
+</g>
+<!-- UserEvent&#45;&gt;FeedbackAPI -->
+<g id="edge1" class="edge">
+<title>UserEvent-&gt;FeedbackAPI</title>
+<path fill="none" stroke="black" d="M121.89,-783.8C121.89,-775.82 121.89,-767.11 121.89,-758.99"/>
+<polygon fill="black" stroke="black" points="125.39,-759.16 121.89,-749.16 118.39,-759.16 125.39,-759.16"/>
+</g>
+<!-- EventHub -->
+<g id="node3" class="node">
+<title>EventHub</title>
+<polygon fill="lightblue" stroke="lightblue" points="182.81,-668.63 60.97,-668.63 60.97,-632.63 182.81,-632.63 182.81,-668.63"/>
+<text text-anchor="middle" x="121.89" y="-646.43" font-family="Arial" font-size="14.00">Azure Event Hub</text>
+</g>
+<!-- FeedbackAPI&#45;&gt;EventHub -->
+<g id="edge2" class="edge">
+<title>FeedbackAPI-&gt;EventHub</title>
+<path fill="none" stroke="black" d="M121.89,-705.27C121.89,-697.49 121.89,-688.46 121.89,-680.05"/>
+<polygon fill="black" stroke="black" points="125.39,-680.28 121.89,-670.28 118.39,-680.28 125.39,-680.28"/>
+</g>
+<!-- ASA -->
+<g id="node4" class="node">
+<title>ASA</title>
+<polygon fill="lightblue" stroke="lightblue" points="204.19,-595.63 39.59,-595.63 39.59,-554.03 204.19,-554.03 204.19,-595.63"/>
+<text text-anchor="middle" x="121.89" y="-579.03" font-family="Arial" font-size="14.00">Azure Stream Analytics</text>
+<text text-anchor="middle" x="121.89" y="-562.23" font-family="Arial" font-size="14.00">(Weight &amp; Tenant Filter)</text>
+</g>
+<!-- EventHub&#45;&gt;ASA -->
+<g id="edge3" class="edge">
+<title>EventHub-&gt;ASA</title>
+<path fill="none" stroke="black" d="M121.89,-632.14C121.89,-624.78 121.89,-615.98 121.89,-607.55"/>
+<polygon fill="black" stroke="black" points="125.39,-607.58 121.89,-597.58 118.39,-607.58 125.39,-607.58"/>
+</g>
+<!-- ADLS -->
+<g id="node5" class="node">
+<title>ADLS</title>
+<polygon fill="lightblue" stroke="lightblue" points="208.49,-517.03 35.29,-517.03 35.29,-475.43 208.49,-475.43 208.49,-517.03"/>
+<text text-anchor="middle" x="121.89" y="-500.43" font-family="Arial" font-size="14.00">Azure Data Lake Storage</text>
+<text text-anchor="middle" x="121.89" y="-483.63" font-family="Arial" font-size="14.00">(Parquet Files)</text>
+</g>
+<!-- ASA&#45;&gt;ADLS -->
+<g id="edge4" class="edge">
+<title>ASA-&gt;ADLS</title>
+<path fill="none" stroke="black" d="M121.89,-553.71C121.89,-546.11 121.89,-537.28 121.89,-528.89"/>
+<polygon fill="black" stroke="black" points="125.39,-529 121.89,-519 118.39,-529 125.39,-529"/>
+</g>
+<!-- Synapse -->
+<g id="node6" class="node">
+<title>Synapse</title>
+<polygon fill="lightblue" stroke="lightblue" points="207.32,-438.43 36.46,-438.43 36.46,-396.83 207.32,-396.83 207.32,-438.43"/>
+<text text-anchor="middle" x="121.89" y="-421.83" font-family="Arial" font-size="14.00">Azure Synapse Analytics</text>
+<text text-anchor="middle" x="121.89" y="-405.03" font-family="Arial" font-size="14.00">(Spark Jobs per Tenant)</text>
+</g>
+<!-- ADLS&#45;&gt;Synapse -->
+<g id="edge5" class="edge">
+<title>ADLS-&gt;Synapse</title>
+<path fill="none" stroke="black" d="M121.89,-475.11C121.89,-467.51 121.89,-458.68 121.89,-450.29"/>
+<polygon fill="black" stroke="black" points="125.39,-450.4 121.89,-440.4 118.39,-450.4 125.39,-450.4"/>
+</g>
+<!-- AzureML -->
+<g id="node7" class="node">
+<title>AzureML</title>
+<polygon fill="lightblue" stroke="lightblue" points="175.02,-359.83 68.76,-359.83 68.76,-318.23 175.02,-318.23 175.02,-359.83"/>
+<text text-anchor="middle" x="121.89" y="-343.23" font-family="Arial" font-size="14.00">Azure ML</text>
+<text text-anchor="middle" x="121.89" y="-326.43" font-family="Arial" font-size="14.00">(ALS Training)</text>
+</g>
+<!-- Synapse&#45;&gt;AzureML -->
+<g id="edge6" class="edge">
+<title>Synapse-&gt;AzureML</title>
+<path fill="none" stroke="black" d="M121.89,-396.51C121.89,-388.91 121.89,-380.08 121.89,-371.69"/>
+<polygon fill="black" stroke="black" points="125.39,-371.8 121.89,-361.8 118.39,-371.8 125.39,-371.8"/>
+</g>
+<!-- ModelRegistry -->
+<g id="node8" class="node">
+<title>ModelRegistry</title>
+<polygon fill="lightblue" stroke="lightblue" points="176.57,-281.23 67.21,-281.23 67.21,-239.63 176.57,-239.63 176.57,-281.23"/>
+<text text-anchor="middle" x="121.89" y="-264.63" font-family="Arial" font-size="14.00">Azure ML</text>
+<text text-anchor="middle" x="121.89" y="-247.83" font-family="Arial" font-size="14.00">Model Registry</text>
+</g>
+<!-- AzureML&#45;&gt;ModelRegistry -->
+<g id="edge7" class="edge">
+<title>AzureML-&gt;ModelRegistry</title>
+<path fill="none" stroke="black" d="M121.89,-317.91C121.89,-310.31 121.89,-301.48 121.89,-293.09"/>
+<polygon fill="black" stroke="black" points="125.39,-293.2 121.89,-283.2 118.39,-293.2 125.39,-293.2"/>
+</g>
+<!-- TableStorage -->
+<g id="node9" class="node">
+<title>TableStorage</title>
+<polygon fill="lightblue" stroke="lightblue" points="159.09,-170.03 14.69,-170.03 14.69,-128.43 159.09,-128.43 159.09,-170.03"/>
+<text text-anchor="middle" x="86.89" y="-153.43" font-family="Arial" font-size="14.00">Azure Table Storage</text>
+<text text-anchor="middle" x="86.89" y="-136.63" font-family="Arial" font-size="14.00">(User/Item Factors)</text>
+</g>
+<!-- ModelRegistry&#45;&gt;TableStorage -->
+<g id="edge8" class="edge">
+<title>ModelRegistry-&gt;TableStorage</title>
+<path fill="none" stroke="black" d="M115.39,-239.15C110.18,-222.9 102.79,-199.85 96.84,-181.28"/>
+<polygon fill="black" stroke="black" points="100.2,-180.3 93.82,-171.85 93.54,-182.44 100.2,-180.3"/>
+<text text-anchor="middle" x="133.29" y="-209.03" font-family="Times,serif" font-size="14.00">Promote</text>
+<text text-anchor="middle" x="133.29" y="-192.23" font-family="Times,serif" font-size="14.00">Factors</text>
+</g>
+<!-- Redis -->
+<g id="node10" class="node">
+<title>Redis</title>
+<polygon fill="lightblue" stroke="lightblue" points="314.2,-170.03 177.58,-170.03 177.58,-128.43 314.2,-128.43 314.2,-170.03"/>
+<text text-anchor="middle" x="245.89" y="-153.43" font-family="Arial" font-size="14.00">Azure Redis Cache</text>
+<text text-anchor="middle" x="245.89" y="-136.63" font-family="Arial" font-size="14.00">(Vector Cache)</text>
+</g>
+<!-- ModelRegistry&#45;&gt;Redis -->
+<g id="edge9" class="edge">
+<title>ModelRegistry-&gt;Redis</title>
+<path fill="none" stroke="black" d="M144.92,-239.15C164.5,-221.91 192.79,-196.99 214.45,-177.92"/>
+<polygon fill="black" stroke="black" points="216.65,-180.64 221.84,-171.41 212.03,-175.39 216.65,-180.64"/>
+<text text-anchor="middle" x="219.73" y="-209.03" font-family="Times,serif" font-size="14.00">Push</text>
+<text text-anchor="middle" x="219.73" y="-192.23" font-family="Times,serif" font-size="14.00">Cache</text>
+</g>
+<!-- App -->
+<g id="node11" class="node">
+<title>App</title>
+<ellipse fill="lightgrey" stroke="lightgrey" cx="245.89" cy="-29.42" rx="99.34" ry="29.42"/>
+<text text-anchor="middle" x="245.89" y="-33.62" font-family="Arial" font-size="14.00">E-commerce App</text>
+<text text-anchor="middle" x="245.89" y="-16.82" font-family="Arial" font-size="14.00">(Internal Consumer)</text>
+</g>
+<!-- Redis&#45;&gt;App -->
+<g id="edge10" class="edge">
+<title>Redis-&gt;App</title>
+<path fill="none" stroke="black" d="M245.89,-127.98C245.89,-112.21 245.89,-89.83 245.89,-70.49"/>
+<polygon fill="black" stroke="black" points="249.39,-70.73 245.89,-60.73 242.39,-70.73 249.39,-70.73"/>
+<text text-anchor="middle" x="297.99" y="-97.83" font-family="Times,serif" font-size="14.00">Get</text>
+<text text-anchor="middle" x="297.99" y="-81.03" font-family="Times,serif" font-size="14.00">Recommendations</text>
+</g>
+</g>
+</svg>
