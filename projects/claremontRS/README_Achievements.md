@@ -1,0 +1,9 @@
+- **250+ tenants** onboarded into the recommendation system
+- **+12% increase in conversion rates** across participating e-commerce sites
+- **1M+ user interactions** processed and analyzed monthly
+- **85% of tenants** reached personalized recommendations within their first week
+- **20x faster onboarding** time compared to manual integration workflows
+- **3-5 personalized recommendations** served per user in under **50ms**
+- **Daily retraining** of models for high-traffic tenants with fully automated pipelines
+- **100% data isolation** between tenants with secure, audited storage and model access
+- **99.95% availability** of the recommendation service across all tenants
