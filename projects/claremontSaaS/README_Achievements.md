@@ -1,0 +1,6 @@
+- **1,000+ SMBs onboarded** over 6 years
+- **500+ Starter-tier tenants** (shared infrastructure with Row-Level Security)
+- **350 Growth-tier tenants** (shared App Service, dedicated databases in Elastic Pools)
+- **100 Enterprise-tier tenants** (fully isolated App Service and database per tenant)
+- **99.95% uptime** achieved using Azure zone-redundant services
+- **92% annual retention rate** across all tiers
