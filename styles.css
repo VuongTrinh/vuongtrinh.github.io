@@ -1,211 +1,384 @@
+.project {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    align-items: stretch;
+    /* height: auto; */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    /* border: 3px solid red; */
+    /* red = project container */
+}
+
+.project-image-wrapper {
+    /* flex: 0 0 50%;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    overflow: hidden;
+    height: 600px;
+    object-fit: cover; */
+
+    height: auto;
+    /* or set via JS */
+    overflow: hidden;
+    flex: 0 0 50%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 3px;
+    /* centers SVG nicely */
+    /* border: 3px yellow; */
+    /* background-color: blue; */
+}
+
+.project-image-wrapper img {
+    /* flex-grow: 1;
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    display: block; */
+    width: 100%;
+    height: auto;
+    object-fit: fill;
+    /* or 'cover', depending on the result you want */
+    display: block;
+    /* border: 3px green; */
+
+}
+
+.project-content {
+    flex: 1;
+    padding: 1rem;
+    overflow: auto;
+}
+
+
+.project-title {
+    margin-bottom: 0.5rem;
+}
+
+.tabs-header {
+    display: flex;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 1rem;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: #444;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.tab-btn:hover {
+    color: #0078d7;
+}
+
+.tab-btn.active {
+    border-bottom-color: #0078d7;
+    color: #0078d7;
+}
+
+.tabs-content .tab-panel {
+    /* your markdown content styles here */
+}
+
+.project-tags {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #eee;
+}
+
+.project-tags .tag {
+    display: inline-block;
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    margin-right: 0.3rem;
+    font-size: 0.8rem;
+}
+
+.spinner {
+    font-weight: 600;
+    color: #004080;
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+    user-select: none;
+    position: relative;
+}
+
+.spinner::after {
+    content: '';
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-left: 0.5rem;
+    border-radius: 50%;
+    background: #004080;
+    animation: pulse 1.2s infinite ease-in-out;
+    vertical-align: middle;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
 body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0 1rem;
-      background: #f7f9fc;
-      color: #222;
-    }
-    header {
-      background: #004080;
-      color: white;
-      padding: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 1.5rem;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 1rem;
-      font-weight: 600;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    h2 {
-      margin-top: 2rem;
-      color: #004080;
-    }
-    .projects-list {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      margin-bottom: 4rem;
-    }
-    .project {
-      display: flex;
-      flex-wrap: wrap;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
-      padding: 1rem;
-      gap: 1rem;
-      align-items: flex-start;
-    }
-    .project img {
-      max-width: 400px;
-      width: 100%;
-      height: auto;
-      border-radius: 6px;
-      flex-shrink: 0;
-      box-shadow: 0 0 8px rgb(0 64 128 / 0.2);
-    }
-    .project-content {
-      flex: 1;
-      min-width: 280px;
-    }
-    .project-title {
-      margin: 0 0 0.5rem 0;
-      color: #004080;
-    }
-    .project-tags {
-      margin-top: 0.5rem;
-    }
-    .project-tags .tag {
-      margin-right: 0.4rem;
-      font-size: 0.8rem;
-      padding: 0.2rem 0.5rem;
-      background: #cfe2ff;
-      color: #003366;
-      border-radius: 3px;
-      cursor: default;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #004080;
-      color: white;
-      margin-top: 3rem;
-    }
-    /* Markdown styles inside project content */
-    .project-content p {
-      margin-top: 0;
-      margin-bottom: 1rem;
-    }
-    .project-content h1,
-    .project-content h2,
-    .project-content h3,
-    .project-content h4,
-    .project-content h5,
-    .project-content h6 {
-      margin-top: 1rem;
-      margin-bottom: 0.5rem;
-      color: #003366;
-    }
-    .project-content ul {
-      margin-left: 1.5rem;
-    }
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 1rem;
+    background: #f7f9fc;
+    color: #222;
+}
 
-    /* Two-column layout for intro and tags */
+header {
+    background: #004080;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem;
+    font-weight: 600;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+h2 {
+    margin-top: 2rem;
+    color: #004080;
+}
+
+.projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+
+
+.project-title {
+    margin: 0 0 0.5rem 0;
+    color: #004080;
+}
+
+.project-tags {
+    margin-top: 0.5rem;
+}
+
+.project-tags .tag {
+    margin-right: 0.4rem;
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+    background: #cfe2ff;
+    color: #003366;
+    border-radius: 3px;
+    cursor: default;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: #004080;
+    color: white;
+    margin-top: 3rem;
+}
+
+/* Markdown styles inside project content */
+.project-content p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.project-content h1,
+.project-content h2,
+.project-content h3,
+.project-content h4,
+.project-content h5,
+.project-content h6 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: #003366;
+}
+
+.project-content ul {
+    margin-left: 1.5rem;
+}
+
+/* Two-column layout for intro and tags */
+.intro-filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 2rem;
+    gap: 2rem;
+    flex-wrap: nowrap;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    padding: 0 1rem;
+    /* match your global padding if needed */
+}
+
+.intro {
+    flex: 0 0 40%;
+    max-width: 40%;
+    /* no box, no background */
+}
+
+.intro h2 {
+    margin-bottom: 0.3rem;
+    color: #004080;
+    font-weight: 700;
+}
+
+.filter {
+    flex: 0 0 60%;
+    max-width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Tags box with tags and button inside */
+.tags-filter {
+    margin: 1rem 0 0 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    padding: 0.8rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 98%;
+    /* max-height: 7.5rem; */
+    /* show ~8 tags */
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.3s ease;
+    box-sizing: border-box;
+    overflow-x: hidden;
+
+}
+
+.tags-filter.expanded {
+    max-height: 1000px;
+    /* large enough to show all */
+    overflow: visible;
+}
+
+.tag {
+    padding: 0.3rem 0.7rem;
+    background: #e0e7ff;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.9rem;
+    color: #004080;
+    border: 1px solid transparent;
+    transition: background-color 0.3s, border-color 0.3s;
+    white-space: normal;
+    word-break: break-word;
+    max-width: 100%;
+}
+
+.tag.selected {
+    background: #004080;
+    color: white;
+    border-color: #003366;
+}
+
+/* Show more button inside tags box, bottom right */
+#show-more-btn {
+    position: absolute;
+    bottom: 6px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #004080;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    user-select: none;
+    padding: 0;
+    line-height: 1;
+    z-index: 10;
+}
+
+#show-more-btn:hover,
+#show-more-btn:focus {
+    text-decoration: underline;
+    outline: none;
+}
+
+/* Responsive tweaks */
+@media (max-width: 720px) {
     .intro-filter-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-top: 2rem;
-      gap: 2rem;
-      flex-wrap: nowrap;
-    }
-
-    .intro {
-      flex: 0 0 40%;
-      max-width: 40%;
-      /* no box, no background */
-    }
-
-    .intro h2 {
-      margin-bottom: 0.3rem;
-      color: #004080;
-      font-weight: 700;
-    }
-
-    .filter {
-      flex: 0 0 60%;
-      max-width: 60%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Tags box with tags and button inside */
-    .tags-filter {
-      margin: 1rem 0 0 0;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      background: white;
-      padding: 0.8rem 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      max-height: 7.5rem; /* show ~8 tags */
-      overflow: hidden;
-      position: relative;
-      transition: max-height 0.3s ease;
-    }
-    .tags-filter.expanded {
-      max-height: 1000px; /* large enough to show all */
-      overflow: visible;
-    }
-    .tag {
-      padding: 0.3rem 0.7rem;
-      background: #e0e7ff;
-      border-radius: 4px;
-      cursor: pointer;
-      user-select: none;
-      font-size: 0.9rem;
-      color: #004080;
-      border: 1px solid transparent;
-      transition: background-color 0.3s, border-color 0.3s;
-    }
-    .tag.selected {
-      background: #004080;
-      color: white;
-      border-color: #003366;
-    }
-
-    /* Show more button inside tags box, bottom right */
-    #show-more-btn {
-      position: absolute;
-      bottom: 6px;
-      right: 10px;
-      background: none;
-      border: none;
-      color: #004080;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      user-select: none;
-      padding: 0;
-      line-height: 1;
-      z-index: 10;
-    }
-    #show-more-btn:hover,
-    #show-more-btn:focus {
-      text-decoration: underline;
-      outline: none;
-    }
-
-    /* Responsive tweaks */
-    @media (max-width: 720px) {
-      .intro-filter-container {
         flex-direction: column;
-      }
-      .intro,
-      .filter {
+    }
+
+    .intro,
+    .filter {
         max-width: 100%;
         flex-basis: 100%;
-      }
-      .tags-filter {
+    }
+
+    .tags-filter {
         max-height: none !important;
         overflow: visible !important;
         position: static;
         padding-bottom: 2rem;
-      }
-      #show-more-btn {
-        display: none;
-      }
     }
+
+    #show-more-btn {
+        display: none;
+    }
+
+    .project {
+        flex-direction: column;
+    }
+
+    .project img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: unset;
+    }
+}
