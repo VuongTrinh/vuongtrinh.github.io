@@ -1,53 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Projects | Technical Manager Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <header>
-    <h1>Technical Manager | Azure Cloud Architect</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="projects.html">Projects</a>
-      <a href="techblogs.html">Tech Blogs</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Projects | Technical Manager Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Technical Manager | Azure Cloud Architect</h1>
+      <nav>
+        <a href="index.html">Portfolio</a>
+        <a href="techblogs.html">Tech Blogs</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
 
-  <main>
-    <section class="intro-filter-container">
-      <div class="intro">
-        <h2>Hello, I’m Vuong</h2>
-        <p>Technical Manager | Azure Cloud Architect</p>
-        <p>Experienced in cloud migration, microservices architecture, and DevOps practices. Passionate about building scalable, secure, and maintainable solutions.</p>
-      </div>
-
-      <div class="filter">
-        <h2>Filter Projects by Tags</h2>
-        <div id="tags-filter" class="tags-filter" aria-label="Project tags filter">
-          <!-- tags buttons added dynamically here -->
-          <button id="show-more-btn" aria-expanded="false" aria-controls="tags-filter" hidden>Show more tags</button>
+    <main>
+      <section class="intro-filter-container">
+        <div class="intro">
+          <h2>Hello, I’m Vuong</h2>
+          <p>Technical Manager | Azure Cloud Architect</p>
+          <p>
+            Accomplished and driven engineer with over 13 years of experience in
+            building products from inception, managing teams, and delivering
+            software used by millions. Microsoft Certified Azure Solutions
+            Architect, adept at designing and implementing scalable, resilient,
+            and cost-effective cloud solutions. Proven expertise as a technical
+            manager and solution architect, specializing in Microsoft
+            technologies. Skilled in analyzing and developing solutions for
+            complex business challenges, from proof of concept through to
+            production and support. A self-motivated software engineer dedicated
+            to finding optimal solutions for programming problems. A
+            hard-working employee, adhere to the company's policies and work
+            toward the company's goals.
+          </p>
         </div>
-      </div>
-    </section>
 
-    <section>
-      <h2>Projects</h2>
-      <div id="projects-list" class="projects-list" aria-live="polite">
-        <!-- projects loaded dynamically here -->
-      </div>
-    </section>
-  </main>
+        <div class="filter">
+          <h2>Filter Projects by Tags</h2>
+          <div
+            id="tags-filter"
+            class="tags-filter"
+            aria-label="Project tags filter"
+          >
+            <!-- tags buttons added dynamically here -->
+            <button
+              id="show-more-btn"
+              aria-expanded="false"
+              aria-controls="tags-filter"
+              hidden
+            >
+              Show more tags
+            </button>
+          </div>
+        </div>
+      </section>
 
-  <footer>
+      <section>
+        <h2>Projects</h2>
+        <div id="projects-list" class="projects-list" aria-live="polite">
+          <!-- projects loaded dynamically here -->
+        </div>
+      </section>
+    </main>
+
+    <!-- <footer>
     <p>&copy; 2025 Technical Manager. All rights reserved.</p>
-  </footer>
+  </footer> -->
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="scripts.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="scripts.js"></script>
+  </body>
 </html>
