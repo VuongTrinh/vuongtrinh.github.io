@@ -36,28 +36,34 @@ async function fetchText(url) {
 
 // --- HASH TAB NAVIGATION ---
 function applyHashNavigation() {
+    function applyHashNavigation() {
     const hash = window.location.hash.slice(1); // remove '#'
     if (!hash) return;
 
     for (const project of projects) {
-        const projectId = project.id;
         const matchTabIndex = project.tabs.findIndex(tab => tab.hash === hash);
-        if (matchTabIndex !== -1) {
-            const projectElement = document.getElementById(projectId);
-            if (!projectElement) return;
+        if (matchTabIndex === -1) continue;
 
-            projectElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const projectElement = document.getElementById(project.id);
+        if (!projectElement) continue;
 
-            const tabButtons = projectElement.querySelectorAll('.tab-btn');
-            const tabPanels = projectElement.querySelectorAll('.tab-panel');
-            tabButtons.forEach((b, i) => {
-                b.classList.toggle('active', i === matchTabIndex);
-                tabPanels[i].hidden = i !== matchTabIndex;
-            });
+        const tabButtons = projectElement.querySelectorAll('.tab-btn');
+        const tabPanels = projectElement.querySelectorAll('.tab-panel');
 
-            break;
-        }
+        // Activate the tab
+        tabButtons.forEach((btn, i) => {
+            btn.classList.toggle('active', i === matchTabIndex);
+            tabPanels[i].hidden = i !== matchTabIndex;
+        });
+
+        // Scroll into view
+        projectElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Done
+        break;
     }
+}
+
 }
 
 // --- MAIN LOAD FUNCTION ---
