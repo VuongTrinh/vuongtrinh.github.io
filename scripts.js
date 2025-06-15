@@ -6,18 +6,12 @@ const projectsPath = "projects";
 let projects = [];
 let allTags = new Set();
 let selectedTags = new Set();
-const tabHashMap = {};
 
 const projectsListEl = document.getElementById("projects-list");
 const tagsFilterEl = document.getElementById("tags-filter");
 const showMoreBtn = document.getElementById("show-more-btn");
 
-// Spinner for loading
-const spinner = document.createElement("div");
-spinner.id = "loading-spinner";
-spinner.innerHTML = `<div class="spinner"></div>`;
-projectsListEl.before(spinner);
-
+// --- FETCH HELPERS ---
 async function fetchJSON(url) {
     try {
         const res = await fetch(url);
@@ -40,39 +34,33 @@ async function fetchText(url) {
     }
 }
 
-function buildTabHashMap(projectsMetadata) {
-    projectsMetadata.forEach(project => {
-        if (!project.id || !Array.isArray(project.tabs)) return;
-        tabHashMap[project.id] = project.tabs.map((tab, idx) => {
-            const hash = `${project.id}-${tab.title.toLowerCase().replace(/\s+/g, '-')}`;
-            tab.hash = hash;
-            return { title: tab.title, hash };
-        });
-    });
-}
-
+// --- HASH TAB NAVIGATION ---
 function applyHashNavigation() {
-    const hash = window.location.hash.slice(1);
+    const hash = window.location.hash.slice(1); // remove '#'
     if (!hash) return;
 
-    for (const [projectId, tabs] of Object.entries(tabHashMap)) {
-        const tabEntry = tabs.find(tab => tab.hash === hash);
-        if (tabEntry) {
+    for (const project of projects) {
+        const projectId = project.id;
+        const matchTabIndex = project.tabs.findIndex(tab => tab.hash === hash);
+        if (matchTabIndex !== -1) {
             const projectElement = document.getElementById(projectId);
-            if (projectElement) {
-                projectElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                const tabButtons = projectElement.querySelectorAll('.tab-btn');
-                const tabIndex = tabs.findIndex(t => t.hash === hash);
-                if (tabButtons[tabIndex]) {
-                    tabButtons[tabIndex].click();
-                    history.replaceState(null, '', `#${hash}`);
-                }
-            }
+            if (!projectElement) return;
+
+            projectElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            const tabButtons = projectElement.querySelectorAll('.tab-btn');
+            const tabPanels = projectElement.querySelectorAll('.tab-panel');
+            tabButtons.forEach((b, i) => {
+                b.classList.toggle('active', i === matchTabIndex);
+                tabPanels[i].hidden = i !== matchTabIndex;
+            });
+
             break;
         }
     }
 }
 
+// --- MAIN LOAD FUNCTION ---
 async function loadProjects() {
     const apiUrl = `https://api.github.com/repos/${githubUser}/${githubRepo}/contents/${projectsPath}?ref=${githubBranch}`;
     const folders = await fetchJSON(apiUrl);
@@ -86,23 +74,34 @@ async function loadProjects() {
 
     for (const dir of projectDirs) {
         const baseRawUrl = `https://raw.githubusercontent.com/${githubUser}/${githubRepo}/${githubBranch}/${projectsPath}/${dir.name}`;
-        const metadata = await fetchJSON(`${baseRawUrl}/metadata.json`);
+        const metadataUrl = `${baseRawUrl}/metadata.json`;
+
+        const metadata = await fetchJSON(metadataUrl);
         if (!metadata || !metadata.name || !metadata.imageFile || !Array.isArray(metadata.tags)) {
+            console.warn(`Invalid metadata.json for project: ${dir.name}`);
             continue;
         }
 
         let tabs = [];
         if (Array.isArray(metadata.tabs) && metadata.tabs.length > 0) {
             for (const tab of metadata.tabs) {
-                if (tab.title && tab.file) {
+                if (tab.title && tab.file && tab.hash) {
                     const tabMd = await fetchText(`${baseRawUrl}/${tab.file}`);
                     const tabHtml = marked.parse(tabMd);
-                    tabs.push({ title: tab.title, content: tabHtml });
+                    tabs.push({
+                        title: tab.title,
+                        content: tabHtml,
+                        hash: tab.hash
+                    });
                 }
             }
         } else {
             const readmeMd = await fetchText(`${baseRawUrl}/README.md`);
-            tabs.push({ title: "Project Overview", content: marked.parse(readmeMd) });
+            tabs.push({
+                title: "Project Overview",
+                content: marked.parse(readmeMd),
+                hash: `${dir.name}-overview`
+            });
         }
 
         metadata.tags.forEach(tag => allTags.add(tag));
@@ -119,18 +118,17 @@ async function loadProjects() {
     }
 
     projects = projectsLoaded;
-    buildTabHashMap(projects);
     renderTagsFilter();
     renderProjects();
     applyHashNavigation();
 }
 
+// --- TAG FILTER UI ---
 function renderTagsFilter() {
     tagsFilterEl.querySelectorAll('.tag').forEach(t => t.remove());
     selectedTags.clear();
 
-    const tagsArray = Array.from(allTags).sort((a, b) => a.localeCompare(b));
-
+    const tagsArray = Array.from(allTags).sort();
     tagsArray.forEach(tag => {
         const btn = document.createElement("button");
         btn.className = "tag";
@@ -146,27 +144,28 @@ function renderTagsFilter() {
         });
         tagsFilterEl.insertBefore(btn, showMoreBtn);
     });
-
     tagsFilterEl.classList.remove("collapsed");
 }
 
+// --- RENDER PROJECTS ---
 function renderProjects() {
     projectsListEl.innerHTML = "";
 
-    let filtered = selectedTags.size > 0
-        ? projects.filter(proj => proj.tags.some(tag => selectedTags.has(tag)))
-        : projects;
+    let filteredProjects = selectedTags.size === 0
+        ? projects
+        : projects.filter(proj => proj.tags.some(tag => selectedTags.has(tag)));
 
-    if (filtered.length === 0) {
+    if (filteredProjects.length === 0) {
         projectsListEl.innerHTML = "<p>No projects match the selected tags.</p>";
         return;
     }
 
-    filtered.forEach(proj => {
+    filteredProjects.forEach(proj => {
         const projEl = document.createElement("article");
         projEl.className = "project";
         projEl.id = proj.id;
 
+        // Image
         const imageWrapper = document.createElement("div");
         imageWrapper.className = "project-image-wrapper";
         const imgEl = document.createElement("img");
@@ -174,44 +173,48 @@ function renderProjects() {
         imgEl.alt = `Screenshot of ${proj.name}`;
         imageWrapper.appendChild(imgEl);
 
+        // Content
         const contentEl = document.createElement("div");
         contentEl.className = "project-content";
 
         const tabsHeader = document.createElement("div");
         tabsHeader.className = "tabs-header";
-
         const tabsContent = document.createElement("div");
         tabsContent.className = "tabs-content";
 
         proj.tabs.forEach((tab, idx) => {
+            // Tab button
             const tabBtn = document.createElement("button");
             tabBtn.className = "tab-btn";
             tabBtn.type = "button";
             tabBtn.textContent = tab.title;
             if (idx === 0) tabBtn.classList.add("active");
 
+            tabBtn.addEventListener("click", () => {
+                tabsHeader.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+                tabsContent.querySelectorAll(".tab-panel").forEach(p => p.hidden = true);
+
+                tabBtn.classList.add("active");
+                tabPanel.hidden = false;
+
+                // Update hash in address bar
+                history.replaceState(null, '', `#${tab.hash}`);
+            });
+
+            tabsHeader.appendChild(tabBtn);
+
+            // Tab content
             const tabPanel = document.createElement("div");
             tabPanel.className = "tab-panel";
             tabPanel.innerHTML = tab.content;
             tabPanel.hidden = idx !== 0;
-
-            tabBtn.addEventListener("click", () => {
-                tabsHeader.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-                tabsContent.querySelectorAll(".tab-panel").forEach(p => p.hidden = true);
-                tabBtn.classList.add("active");
-                tabPanel.hidden = false;
-                fixImageWrapperHeight();
-                const hash = `${proj.id}-${tab.title.toLowerCase().replace(/\s+/g, '-')}`;
-                history.replaceState(null, '', `#${hash}`);
-            });
-
-            tabsHeader.appendChild(tabBtn);
             tabsContent.appendChild(tabPanel);
         });
 
         contentEl.appendChild(tabsHeader);
         contentEl.appendChild(tabsContent);
 
+        // Tags
         const tagsEl = document.createElement("div");
         tagsEl.className = "project-tags";
         proj.tags.forEach(t => {
@@ -222,28 +225,19 @@ function renderProjects() {
         });
 
         contentEl.appendChild(tagsEl);
-
         projEl.appendChild(imageWrapper);
         projEl.appendChild(contentEl);
         projectsListEl.appendChild(projEl);
     });
-
-    fixImageWrapperHeight();
 }
 
-function fixImageWrapperHeight() {
-    document.querySelectorAll(".project").forEach(project => {
-        const content = project.querySelector(".project-content");
-        const imageWrapper = project.querySelector(".project-image-wrapper");
-        if (content && imageWrapper) {
-            const visibleTabPanel = content.querySelector(".tab-panel:not([hidden])");
-            if (visibleTabPanel) {
-                imageWrapper.style.height = visibleTabPanel.offsetHeight + "px";
-            }
-        }
-    });
-}
+// --- SPINNER LOADING ---
+const spinner = document.createElement("div");
+spinner.id = "loading-spinner";
+spinner.innerHTML = `<div class="spinner"></div>`;
+projectsListEl.before(spinner);
 
+// --- MAIN ---
 async function main() {
     spinner.style.display = "block";
     await loadProjects();
