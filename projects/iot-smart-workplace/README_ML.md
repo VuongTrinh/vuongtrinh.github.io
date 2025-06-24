@@ -1,29 +1,119 @@
-The project leverages a rich dataset of approximately 20,000 data points gathered from tenant-specific LoRaWAN sensors monitoring environmental conditions and occupancy patterns.
+# Model Development and Experimental Design – Smart Workplace (Occupant Count Estimation)
 
-- **Exploratory Data Analysis (EDA)** was performed to evaluate missing data patterns, seasonal fluctuations, sensor correlation heatmaps, and anomaly detection. This provided a statistical foundation for downstream feature design and model strategy.
+## 1. Business Problem
 
-- **Feature engineering** introduced domain-informed transformations such as **rolling window aggregates** (mean, std, delta over past 5- and 15-minute intervals), **hour-of-day encodings**, and **device type embeddings**.
+Design a machine learning model that accurately estimates the number of occupants in a workspace using sensor data. The model should enable smart control of HVAC and lighting systems based on real-time and predicted occupancy.
 
-- **Dimensionality reduction** applied **Linear Discriminant Analysis (LDA)** bringing features from ~25 dimensions down to 5, with >85% variance retention.
+---
 
-- Baseline models including **Linear Regression** (RMSE ~5.8, MAE ~4.3), **Decision Trees** (RMSE ~5.1, MAE ~3.9), and **K-Nearest Neighbors (KNN)** (RMSE ~5.0, MAE ~3.8) are initially developed to establish performance benchmarks quickly. These interpretable models provide valuable insights into the predictive power of the engineered features.
+## 2. Objective
 
-- Advanced models are deployed: **XGBoost** (RMSE ~3.9, MAE ~2.8) captures complex, non-linear feature interactions specific to each tenant, while a global **Long Short-Term Memory (LSTM)** neural network (RMSE ~3.5, MAE ~2.5) exploits temporal dependencies across the multi-tenant dataset for improved occupant forecasting.
+- Predict the **occupant count** (regression task) from environmental sensor data (temperature, humidity, light, CO₂, sound, etc.)
+- Prioritize **low-latency inference**, **accuracy**, and **explainability** for operational deployment in Azure IoT Edge environment.
 
-- **Model validation** is achieved through **10-fold cross-validation (k=10)**, balancing bias and variance effectively on the 20,000-sample dataset. This technique ensures robust performance estimates and minimizes overfitting risks.
+---
 
-- **Hyperparameter tuning** is conducted using MLflow’s experiment tracking capabilities. Example hyperparameters tuned include:
+## 3. Target Variable
 
-  - For **XGBoost**:
-    - `max_depth`: 3 to 10 (optimal found: 6)
-    - `learning_rate`: 0.01 to 0.3 (optimal found: 0.1)
-    - `n_estimators`: 100 to 500 (optimal found: 250)
-    - `subsample`: 0.6 to 1.0 (optimal found: 0.8)
-  - For **LSTM**:
-    - Number of layers: 1 to 3 (optimal found: 2)
-    - Number of units per layer: 50 to 200 (optimal found: 128)
-    - Dropout rate: 0.1 to 0.5 (optimal found: 0.3)
-    - Learning rate: 0.0001 to 0.01 (optimal found: 0.001)
-    - Batch size: 32 to 128 (optimal found: 64)
+- **Occupant Count**: A numerical variable indicating how many people are present in the room.
 
-- **MLOps with Databricks & MLflow**: Implemented full-cycle MLOps practices using Databricks and MLflow—including experiment tracking, model registry, and pipeline automation with Delta Live Tables and Databricks Workflows. Both global LSTM models and tenant-specific XGBoost models are trained and served within Databricks. Inference is performed using Pandas UDFs with dynamic model selection based on `tenant_id`, enabling scalable, production-grade predictions across the multi-tenant environment.
+---
+
+## 4. Evaluation Metrics
+
+| Metric         | Reason                                                   |
+|----------------|----------------------------------------------------------|
+| MAE (Mean Absolute Error) | Easy to interpret in number-of-people units. |
+| RMSE (Root Mean Squared Error) | Penalizes large errors more. Helps avoid underestimation/overestimation. |
+| R² Score       | Indicates the proportion of variance explained.          |
+
+---
+
+## 5. Decision Criteria
+
+- **MAE ≤ 1.5** is acceptable for real-time estimation.
+- **RMSE ≤ 2.0** preferred for safety-critical automation.
+- **Inference latency ≤ 150ms** in Edge containerized environment.
+
+---
+
+## 6. Candidate Features
+
+- Temperature, Humidity, Light, CO₂, Sound, Motion
+- Time of Day (encoded as cyclical features)
+- Room ID / Room Size (optional if multiple rooms)
+
+---
+
+## 7. Preprocessing Variants
+
+| Variant Code | Technique                        | Notes                         |
+|--------------|----------------------------------|-------------------------------|
+| A1           | Raw normalized features          | MinMax or Standard scaling    |
+| A2           | PCA (retain 95% variance)        | Reduce dimensionality         |
+| A3           | LDA (if occupancy binned)        | Semi-supervised approach      |
+| A4           | Feature Selection (e.g., SHAP)   | Keep top N features           |
+
+---
+
+## 8. Candidate Models
+
+| Model Code | Model Type              | Notes                                  |
+|------------|-------------------------|----------------------------------------|
+| M1         | Linear Regression       | Baseline model                         |
+| M2         | Decision Tree Regressor| Captures non-linear relationships      |
+| M3         | Random Forest Regressor| Ensemble, interpretable with SHAP      |
+| M4         | XGBoost Regressor      | Handles multicollinearity, robust      |
+| M5         | LSTM Neural Network    | For future time-window estimation      |
+
+---
+
+## 9. Experiment Matrix
+
+| ID  | Features | Model | Notes                              |
+|-----|----------|--------|------------------------------------|
+| E1  | A1       | M1     | Baseline performance               |
+| E2  | A1       | M3     | Interpretable, strong accuracy     |
+| E3  | A2       | M4     | Lower dimensions, fast inference   |
+| E4  | A3       | M2     | Test if LDA improves trees         |
+| E5  | A4       | M5     | Time series experiment             |
+
+---
+
+## 10. Hyperparameter Tuning
+
+- Grid search for M1–M4
+- Random search or Optuna for M5 (LSTM)
+- Evaluation via K-Fold cross-validation (k=5)
+
+---
+
+## 11. Experiment Tracking & Reproducibility
+
+- **Tool**: MLflow Tracking
+- **Logged artifacts**:
+  - Preprocessing version
+  - Model type & parameters
+  - Evaluation metrics
+  - Git SHA and notebook hash
+- **Version Control**: Git + Azure DevOps CI/CD pipelines
+
+---
+
+## 12. Model Registry & Deployment
+
+- **Registry**: MLflow Model Registry (Staging → Production)
+- **Model Packaging**: MLflow pyfunc or ONNX (if required by edge)
+- **Deployment Target**:
+  - Real-time inference: Azure IoT Edge module
+  - Batch or scheduled inference: Databricks Job
+
+---
+
+## 13. Final Decision Strategy
+
+- Shortlist top 2 models based on MAE + latency trade-off
+- Evaluate on a hold-out month of IoT telemetry
+- Run pilot deployment in lab environment before full rollout
+
+---
