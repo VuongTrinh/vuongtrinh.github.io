@@ -12,11 +12,6 @@ The solution architecture for this IoT and ML-driven multi-tenant system was gui
 - **Row-Level Security (RLS)** is enforced at the Delta and ADX layers to ensure data segregation across tenants.
 - **Azure IoT Edge** modules enable secure uplink communication with offline buffering at the **LoRaWAN Gateway**.
 
-## **Data Ingestion and Processing**
-
-- Sensor data from LoRaWAN gateways is routed through **Azure IoT Hub** and egressed via **Event Hub**, forming a scalable, decoupled telemetry pipeline.
-- **Delta Live Tables** orchestrate ETL flows, transforming raw telemetry into ML-ready features and tenant-specific aggregates.
-
 ## **Intelligent Insights**
 
 - **Per-tenant XGBoost models** dynamically infer occupancy using **Pandas UDFs**, allowing runtime selection by `tenant_id`.
