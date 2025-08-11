@@ -41,7 +41,7 @@
 <title>Databricks</title>
 <path fill="#e67e22" stroke="black" d="M448,-483C448,-483 40,-483 40,-483 34,-483 28,-477 28,-471 28,-471 28,-423 28,-423 28,-417 34,-411 40,-411 40,-411 448,-411 448,-411 454,-411 460,-417 460,-423 460,-423 460,-471 460,-471 460,-477 454,-483 448,-483"/>
 <text text-anchor="middle" x="244" y="-459.6" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">Azure Databricks</text>
-<text text-anchor="middle" x="244" y="-442.8" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">(Structured Streaming, Delta Lake, Feature Engineering</text>
+<text text-anchor="middle" x="244" y="-442.8" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">(Structured Streaming, Delta Lake, Feature Engineering, </text>
 <text text-anchor="middle" x="244" y="-426" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white"> ML model training &amp; inference pipelines)</text>
 </g>
 <!-- EventHub&#45;&gt;Databricks -->
