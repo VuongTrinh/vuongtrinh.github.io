@@ -6,22 +6,27 @@
   "tabs": [
     {
       "title": "Project Overview",
-      "file": "README.md"
+      "file": "README.md",
+      "hash": "iot-smart-workplace-overview"
     },
     {
       "title": "Architecture",
-      "file": "README_Architecture.md"
+      "file": "README_Architecture.md",
+      "hash": "iot-smart-workplace-architecture"
     },
     {
-      "title": "Machine Learning Pipeline",
-      "file": "README_ML.md"
+      "title": "Machine Learning Solutions",
+      "file": "README_ML.md",
+      "hash": "iot-smart-workplace-ml"
     },
     { "title": "Design Outcomes",
-      "file": "README_Outcomes.md" 
+      "file": "README_Outcomes.md",
+      "hash": "iot-smart-workplace-outcomes"
     },
     {
       "title": "Achievements",
-      "file": "README_Achievements.md"
+      "file": "README_Achievements.md",
+      "hash": "iot-smart-workplace-achievements"
     }
   ]
 }
