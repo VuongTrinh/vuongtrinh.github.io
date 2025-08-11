@@ -1,5 +1,5 @@
 - **Onboarded 550+ tenants** across diverse industries, supporting thousands of IoT devices with secure multi-tenant isolation.
-- **Processed over 200 million telemetry messages per month** through Azure IoT Hub and Event Hub with 99.95% ingestion uptime.
+- **Processed over 1000 telemetry messages per second** through Azure IoT Hub and Event Hub with 99.95% ingestion uptime.
 - **Reduced energy consumption by 18–25% per tenant**, based on intelligent environment control driven by real-time occupancy prediction.
 - **Improved space utilization by up to 30%**, allowing organizations to downsize or repurpose underused office areas, reducing real estate costs.
 - **Achieved 98.7% occupant count prediction accuracy** using tenant-specific machine learning models (XGBoost) and a global fallback LSTM model.
