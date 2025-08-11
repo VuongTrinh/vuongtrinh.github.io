@@ -1,5 +1,6 @@
 {
   "name": "Smart Workplace",
+  "seq_no": 1,
   "imageFile": "iot-smart-workplace-architecture.svg",
   "tags": ["Azure", "IoT", "Edge", "Databricks", "MLOps", "Machine Learning", "Deep Learning", "LSTM", "XGBoost", "LoraWan", "Azure IoT Edge", "Azure IoT Hub", "Azure DPS", "Azure Event Hub", "Azure Data Explorer", "Azure App Service", "Azure Function", "Azure Application Gateway", "Serverless", "Multi-tenant", "Lambda Architecture", "Medallion Architecture"],
   "tabs": [
