@@ -1,5 +1,6 @@
 {
   "name": "Claremont SaaS E-commerce",
+  "seq_no": 5,
   "imageFile": "claremontSaaS.svg",
   "tags": ["Azure", "Kubernetes", "Multi-Tenancy", "GitOps", "Event-driven", "Microservices", "Domain-driven Design", "API-first", "Azure Private Link", "Azure Application Gateway", "Azure API Management", "Azure Cosmos DB", "PostgreSQL", "Azure Managed Application", "Azure Service Bus", "Azure Event Grid", "Azure Function", "Azure Monitor", "Azure KeyVault"],
   "tabs": [
