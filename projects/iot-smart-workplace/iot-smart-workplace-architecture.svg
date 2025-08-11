@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="575pt" height="966pt" viewBox="0.00 0.00 575.18 966.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(36 930)">
+<title>architecture</title>
+<polygon fill="white" stroke="none" points="-36,36 -36,-930 539.18,-930 539.18,36 -36,36"/>
+<!-- LoRaWAN -->
+<g id="node1" class="node">
+<title>LoRaWAN</title>
+<path fill="#1f4e79" stroke="black" d="M448,-894C448,-894 40,-894 40,-894 34,-894 28,-888 28,-882 28,-882 28,-834 28,-834 28,-828 34,-822 40,-822 40,-822 448,-822 448,-822 454,-822 460,-828 460,-834 460,-834 460,-882 460,-882 460,-888 454,-894 448,-894"/>
+<text text-anchor="middle" x="244" y="-862.2" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">LoRaWAN Gateway + Azure IoT Edge Modules</text>
+<text text-anchor="middle" x="244" y="-845.4" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">(edge runtime + routing, local buffering, secured uplink)</text>
+</g>
+<!-- IoTHub -->
+<g id="node2" class="node">
+<title>IoTHub</title>
+<path fill="#2f6eb9" stroke="black" d="M448,-757C448,-757 40,-757 40,-757 34,-757 28,-751 28,-745 28,-745 28,-697 28,-697 28,-691 34,-685 40,-685 40,-685 448,-685 448,-685 454,-685 460,-691 460,-697 460,-697 460,-745 460,-745 460,-751 454,-757 448,-757"/>
+<text text-anchor="middle" x="244" y="-725.2" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">Azure IoT Hub + Azure DPS per Tenant</text>
+<text text-anchor="middle" x="244" y="-708.4" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">(device provisioning, device twin, telemetry ingress)</text>
+</g>
+<!-- LoRaWAN&#45;&gt;IoTHub -->
+<g id="edge1" class="edge">
+<title>LoRaWAN-&gt;IoTHub</title>
+<path fill="none" stroke="#2c6bed" stroke-width="2.5" d="M244,-821.53C244,-806.03 244,-787.59 244,-770.82"/>
+<polygon fill="#2c6bed" stroke="#2c6bed" stroke-width="2.5" points="247.5,-771.02 244,-761.02 240.5,-771.02 247.5,-771.02"/>
+</g>
+<!-- EventHub -->
+<g id="node3" class="node">
+<title>EventHub</title>
+<path fill="#3a9ca7" stroke="black" d="M448,-620C448,-620 40,-620 40,-620 34,-620 28,-614 28,-608 28,-608 28,-560 28,-560 28,-554 34,-548 40,-548 40,-548 448,-548 448,-548 454,-548 460,-554 460,-560 460,-560 460,-608 460,-608 460,-614 454,-620 448,-620"/>
+<text text-anchor="middle" x="244" y="-596.6" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">Azure Event Hub</text>
+<text text-anchor="middle" x="244" y="-579.8" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">(IoT telemetry egress</text>
+<text text-anchor="middle" x="244" y="-563" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">for streaming)</text>
+</g>
+<!-- IoTHub&#45;&gt;EventHub -->
+<g id="edge2" class="edge">
+<title>IoTHub-&gt;EventHub</title>
+<path fill="none" stroke="#2c6bed" stroke-width="2.5" d="M244,-684.53C244,-669.03 244,-650.59 244,-633.82"/>
+<polygon fill="#2c6bed" stroke="#2c6bed" stroke-width="2.5" points="247.5,-634.02 244,-624.02 240.5,-634.02 247.5,-634.02"/>
+</g>
+<!-- Databricks -->
+<g id="node4" class="node">
+<title>Databricks</title>
+<path fill="#e67e22" stroke="black" d="M448,-483C448,-483 40,-483 40,-483 34,-483 28,-477 28,-471 28,-471 28,-423 28,-423 28,-417 34,-411 40,-411 40,-411 448,-411 448,-411 454,-411 460,-417 460,-423 460,-423 460,-471 460,-471 460,-477 454,-483 448,-483"/>
+<text text-anchor="middle" x="244" y="-459.6" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">Azure Databricks</text>
+<text text-anchor="middle" x="244" y="-442.8" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">(Structured Streaming, Delta Lake, Feature Engineering</text>
+<text text-anchor="middle" x="244" y="-426" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white"> ML model training &amp; inference pipelines)</text>
+</g>
+<!-- EventHub&#45;&gt;Databricks -->
+<g id="edge3" class="edge">
+<title>EventHub-&gt;Databricks</title>
+<path fill="none" stroke="#2c6bed" stroke-width="2.5" d="M244,-547.53C244,-532.03 244,-513.59 244,-496.82"/>
+<polygon fill="#2c6bed" stroke="#2c6bed" stroke-width="2.5" points="247.5,-497.02 244,-487.02 240.5,-497.02 247.5,-497.02"/>
+</g>
+<!-- DeltaLake -->
+<g id="node5" class="node">
+<title>DeltaLake</title>
+<path fill="#3c9d37" stroke="black" d="M204,-346C204,-346 12,-346 12,-346 6,-346 0,-340 0,-334 0,-334 0,-286 0,-286 0,-280 6,-274 12,-274 12,-274 204,-274 204,-274 210,-274 216,-280 216,-286 216,-286 216,-334 216,-334 216,-340 210,-346 204,-346"/>
+<text text-anchor="middle" x="108" y="-314.2" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">Delta Lake (ADLS Gen2)</text>
+<text text-anchor="middle" x="108" y="-297.4" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">(Historical &amp; ML-ready data)</text>
+</g>
+<!-- Databricks&#45;&gt;DeltaLake -->
+<g id="edge4" class="edge">
+<title>Databricks-&gt;DeltaLake</title>
+<path fill="none" stroke="#2c6bed" stroke-width="2.5" d="M208.27,-410.53C191.4,-393.79 171.09,-373.62 153.17,-355.83"/>
+<polygon fill="#2c6bed" stroke="#2c6bed" stroke-width="2.5" points="155.74,-353.46 146.18,-348.9 150.81,-358.43 155.74,-353.46"/>
+</g>
+<!-- ADX -->
+<g id="node6" class="node">
+<title>ADX</title>
+<path fill="#6a5acd" stroke="black" d="M491.18,-346C491.18,-346 270.82,-346 270.82,-346 264.82,-346 258.82,-340 258.82,-334 258.82,-334 258.82,-286 258.82,-286 258.82,-280 264.82,-274 270.82,-274 270.82,-274 491.18,-274 491.18,-274 497.18,-274 503.18,-280 503.18,-286 503.18,-286 503.18,-334 503.18,-334 503.18,-340 497.18,-346 491.18,-346"/>
+<text text-anchor="middle" x="381" y="-314.2" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">Azure Data Explorer</text>
+<text text-anchor="middle" x="381" y="-297.4" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">(Real-time analytics &amp; serving layer)</text>
+</g>
+<!-- Databricks&#45;&gt;ADX -->
+<g id="edge5" class="edge">
+<title>Databricks-&gt;ADX</title>
+<path fill="none" stroke="#2c6bed" stroke-width="2.5" d="M280,-410.53C296.99,-393.79 317.45,-373.62 335.5,-355.83"/>
+<polygon fill="#2c6bed" stroke="#2c6bed" stroke-width="2.5" points="337.88,-358.4 342.55,-348.89 332.97,-353.41 337.88,-358.4"/>
+</g>
+<!-- Serverless -->
+<g id="node7" class="node">
+<title>Serverless</title>
+<path fill="#00796b" stroke="black" d="M448,-209C448,-209 40,-209 40,-209 34,-209 28,-203 28,-197 28,-197 28,-149 28,-149 28,-143 34,-137 40,-137 40,-137 448,-137 448,-137 454,-137 460,-143 460,-149 460,-149 460,-197 460,-197 460,-203 454,-209 448,-209"/>
+<text text-anchor="middle" x="244" y="-185.6" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">Serverless APIs (Azure Functions)</text>
+<text text-anchor="middle" x="244" y="-168.8" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">(Tenant-specific entity functions)</text>
+<text text-anchor="middle" x="244" y="-152" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">(Stateless APIs for querying &amp; reporting)</text>
+</g>
+<!-- DeltaLake&#45;&gt;Serverless -->
+<g id="edge6" class="edge">
+<title>DeltaLake-&gt;Serverless</title>
+<path fill="none" stroke="#2c6bed" stroke-width="2.5" d="M129.34,-273.53C144.33,-256.7 164.48,-236.41 183.85,-218.55"/>
+<polygon fill="#2c6bed" stroke="#2c6bed" stroke-width="2.5" points="186.02,-221.31 191.08,-212.01 181.32,-216.13 186.02,-221.31"/>
+</g>
+<!-- ADX&#45;&gt;Serverless -->
+<g id="edge8" class="edge">
+<title>ADX-&gt;Serverless</title>
+<path fill="none" stroke="#2c6bed" stroke-width="2.5" d="M330.62,-273.53C311.84,-256.94 291.29,-237 274.67,-219.33"/>
+<polygon fill="#2c6bed" stroke="#2c6bed" stroke-width="2.5" points="277.3,-217.01 267.95,-212.02 272.15,-221.75 277.3,-217.01"/>
+</g>
+<!-- Serverless&#45;&gt;DeltaLake -->
+<g id="edge7" class="edge">
+<title>Serverless-&gt;DeltaLake</title>
+<path fill="none" stroke="#2c6bed" stroke-width="2.5" d="M222.87,-209.23C207.87,-226.1 187.65,-246.48 168.19,-264.41"/>
+<polygon fill="#2c6bed" stroke="#2c6bed" stroke-width="2.5" points="165.99,-261.68 160.93,-270.99 170.69,-266.87 165.99,-261.68"/>
+</g>
+<!-- Serverless&#45;&gt;ADX -->
+<g id="edge9" class="edge">
+<title>Serverless-&gt;ADX</title>
+<path fill="none" stroke="#2c6bed" stroke-width="2.5" d="M294.38,-209.47C313.08,-225.99 333.55,-245.84 350.13,-263.46"/>
+<polygon fill="#2c6bed" stroke="#2c6bed" stroke-width="2.5" points="347.48,-265.76 356.83,-270.75 352.64,-261.02 347.48,-265.76"/>
+</g>
+<!-- Frontend -->
+<g id="node8" class="node">
+<title>Frontend</title>
+<path fill="#483d8b" stroke="black" d="M448,-72C448,-72 40,-72 40,-72 34,-72 28,-66 28,-60 28,-60 28,-12 28,-12 28,-6 34,0 40,0 40,0 448,0 448,0 454,0 460,-6 460,-12 460,-12 460,-60 460,-60 460,-66 454,-72 448,-72"/>
+<text text-anchor="middle" x="244" y="-40.2" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">Shared Frontend</text>
+<text text-anchor="middle" x="244" y="-23.4" font-family="Segoe UI, Tahoma, Arial" font-size="14.00" fill="white">(Azure App Service behind Application Gateway)</text>
+</g>
+<!-- Serverless&#45;&gt;Frontend -->
+<g id="edge10" class="edge">
+<title>Serverless-&gt;Frontend</title>
+<path fill="none" stroke="#2c6bed" stroke-width="2.5" d="M244,-136.53C244,-121.03 244,-102.59 244,-85.82"/>
+<polygon fill="#2c6bed" stroke="#2c6bed" stroke-width="2.5" points="247.5,-86.02 244,-76.02 240.5,-86.02 247.5,-86.02"/>
+</g>
+</g>
+</svg>
