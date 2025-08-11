@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="736pt" viewBox="0.00 0.00 1007.91 736.04">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 732.04)">
+<title>ALS_Recommender_Pipeline</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-732.04 1003.91,-732.04 1003.91,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster_user</title>
+<polygon fill="none" stroke="gray" stroke-dasharray="5,2" points="572,-627.2 572,-720.04 962,-720.04 962,-627.2 572,-627.2"/>
+<text text-anchor="middle" x="767" y="-703.44" font-family="Times,serif" font-size="14.00" fill="gray">User Interaction</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_ingest</title>
+<polygon fill="none" stroke="#0078d4" stroke-dasharray="5,2" points="652,-434.8 652,-608.2 768,-608.2 768,-434.8 652,-434.8"/>
+<text text-anchor="middle" x="710" y="-591.6" font-family="Times,serif" font-size="14.00" fill="#0078d4">Data Ingestion</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_stream</title>
+<polygon fill="none" stroke="#0078d4" stroke-dasharray="5,2" points="657,-322.4 657,-400 842,-400 842,-322.4 657,-322.4"/>
+<text text-anchor="middle" x="749.5" y="-383.4" font-family="Times,serif" font-size="14.00" fill="#0078d4">Stream Processing &amp; Filtering</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_storage</title>
+<polygon fill="none" stroke="#107c10" stroke-dasharray="5,2" points="259,-210 259,-287.6 413,-287.6 413,-210 259,-210"/>
+<text text-anchor="middle" x="336" y="-271" font-family="Times,serif" font-size="14.00" fill="#107c10">Data Lake</text>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_ml</title>
+<polygon fill="none" stroke="#ff8c00" stroke-dasharray="5,2" points="8,-210 8,-511.6 239,-511.6 239,-210 8,-210"/>
+<text text-anchor="middle" x="123.5" y="-495" font-family="Times,serif" font-size="14.00" fill="#ff8c00">Data Preparation &amp; Machine Learning</text>
+</g>
+<g id="clust6" class="cluster">
+<title>cluster_analytics</title>
+<polygon fill="none" stroke="#f2c811" stroke-dasharray="5,2" points="495,-322.4 495,-400 649,-400 649,-322.4 495,-322.4"/>
+<text text-anchor="middle" x="572" y="-383.4" font-family="Times,serif" font-size="14.00" fill="#f2c811">Analytics &amp; BI</text>
+</g>
+<g id="clust7" class="cluster">
+<title>cluster_serving</title>
+<polygon fill="none" stroke="#800080" stroke-dasharray="5,2" points="517,-8 517,-175.2 717,-175.2 717,-8 517,-8"/>
+<text text-anchor="middle" x="617" y="-158.6" font-family="Times,serif" font-size="14.00" fill="#800080">Real-time Serving</text>
+</g>
+<!-- UserEvent -->
+<g id="node1" class="node">
+<title>UserEvent</title>
+<ellipse fill="#f3f2f1" stroke="black" cx="678" cy="-661.22" rx="97.55" ry="26.02"/>
+<text text-anchor="middle" x="678" y="-664.82" font-family="Segoe UI" font-size="12.00">User Events</text>
+<text text-anchor="middle" x="678" y="-650.42" font-family="Segoe UI" font-size="12.00">(View, Cart, Purchase,...)</text>
+</g>
+<!-- FeedbackAPI -->
+<g id="node3" class="node">
+<title>FeedbackAPI</title>
+<polygon fill="#c7e6ff" stroke="black" points="754.15,-575.4 661.85,-575.4 661.85,-538.6 754.15,-538.6 754.15,-575.4"/>
+<text text-anchor="middle" x="708" y="-560.6" font-family="Segoe UI" font-size="12.00">Azure Function</text>
+<text text-anchor="middle" x="708" y="-546.2" font-family="Segoe UI" font-size="12.00">(Feedback API)</text>
+</g>
+<!-- UserEvent&#45;&gt;FeedbackAPI -->
+<g id="edge1" class="edge">
+<title>UserEvent-&gt;FeedbackAPI</title>
+<path fill="none" stroke="black" d="M685.42,-634.95C689.73,-620.25 695.18,-601.68 699.64,-586.47"/>
+<polygon fill="black" stroke="black" points="702.95,-587.64 702.41,-577.06 696.23,-585.67 702.95,-587.64"/>
+</g>
+<!-- App -->
+<g id="node2" class="node">
+<title>App</title>
+<ellipse fill="#f3f2f1" stroke="black" cx="874" cy="-661.22" rx="80.35" ry="26.02"/>
+<text text-anchor="middle" x="874" y="-664.82" font-family="Segoe UI" font-size="12.00">CloudShop</text>
+<text text-anchor="middle" x="874" y="-650.42" font-family="Segoe UI" font-size="12.00">(Internal Consumer)</text>
+</g>
+<!-- EventHub -->
+<g id="node4" class="node">
+<title>EventHub</title>
+<polygon fill="#c7e6ff" stroke="black" points="759.99,-478.8 660.01,-478.8 660.01,-442.8 759.99,-442.8 759.99,-478.8"/>
+<text text-anchor="middle" x="710" y="-457.2" font-family="Segoe UI" font-size="12.00">Azure Event Hub</text>
+</g>
+<!-- FeedbackAPI&#45;&gt;EventHub -->
+<g id="edge2" class="edge">
+<title>FeedbackAPI-&gt;EventHub</title>
+<path fill="none" stroke="black" d="M708.38,-538.28C708.66,-524.78 709.06,-505.9 709.4,-490.29"/>
+<polygon fill="black" stroke="black" points="712.89,-490.71 709.6,-480.63 705.89,-490.56 712.89,-490.71"/>
+</g>
+<!-- ASA -->
+<g id="node5" class="node">
+<title>ASA</title>
+<polygon fill="#c7e6ff" stroke="black" points="801.48,-367.2 664.52,-367.2 664.52,-330.4 801.48,-330.4 801.48,-367.2"/>
+<text text-anchor="middle" x="733" y="-352.4" font-family="Segoe UI" font-size="12.00">Azure Stream Analytics</text>
+<text text-anchor="middle" x="733" y="-338" font-family="Segoe UI" font-size="12.00">(Weight &amp; Tenant Filter)</text>
+</g>
+<!-- EventHub&#45;&gt;ASA -->
+<g id="edge3" class="edge">
+<title>EventHub-&gt;ASA</title>
+<path fill="none" stroke="black" d="M713.59,-442.61C717.16,-425.54 722.7,-399.05 726.95,-378.73"/>
+<polygon fill="black" stroke="black" points="730.35,-379.58 728.97,-369.08 723.5,-378.15 730.35,-379.58"/>
+</g>
+<!-- ADLS -->
+<g id="node6" class="node">
+<title>ADLS</title>
+<polygon fill="#b7e3b0" stroke="black" points="404.8,-254.8 267.2,-254.8 267.2,-218 404.8,-218 404.8,-254.8"/>
+<text text-anchor="middle" x="336" y="-240" font-family="Segoe UI" font-size="12.00">Azure Data Lake Storage</text>
+<text text-anchor="middle" x="336" y="-225.6" font-family="Segoe UI" font-size="12.00">(Parquet Files)</text>
+</g>
+<!-- ASA&#45;&gt;ADLS -->
+<g id="edge4" class="edge">
+<title>ASA-&gt;ADLS</title>
+<path fill="none" stroke="black" d="M678.02,-329.98C669.65,-327.38 661.11,-324.77 653,-322.4 572.74,-298.91 480.32,-274.42 416.06,-257.79"/>
+<polygon fill="black" stroke="black" points="417.22,-254.48 406.67,-255.37 415.47,-261.26 417.22,-254.48"/>
+</g>
+<!-- Synapse -->
+<g id="node7" class="node">
+<title>Synapse</title>
+<polygon fill="#ffd6a5" stroke="black" points="230.65,-478.8 93.35,-478.8 93.35,-442.8 230.65,-442.8 230.65,-478.8"/>
+<text text-anchor="middle" x="162" y="-457.2" font-family="Segoe UI" font-size="12.00">Azure Synapse Analytics</text>
+</g>
+<!-- ADLS&#45;&gt;Synapse -->
+<g id="edge5" class="edge">
+<title>ADLS-&gt;Synapse</title>
+<path fill="none" stroke="black" d="M325.79,-255.24C315.29,-272.13 297.46,-297.12 276,-312.4 265.19,-320.1 256.89,-312.67 247.87,-322.4 215.8,-356.99 248.42,-387.16 220,-424.8 216.97,-428.82 213.33,-432.47 209.37,-435.76"/>
+<polygon fill="black" stroke="black" points="207.52,-432.78 201.53,-441.52 211.66,-438.42 207.52,-432.78"/>
+<text text-anchor="middle" x="286.93" y="-344.6" font-family="Times,serif" font-size="14.00">Training Data</text>
+</g>
+<!-- ADLS&#45;&gt;Synapse -->
+<g id="edge9" class="edge">
+<title>ADLS-&gt;Synapse</title>
+<path fill="none" stroke="gray" stroke-dasharray="5,2" d="M340.64,-255.15C347.98,-287.51 358.32,-356.71 326,-400 306.05,-426.72 272.96,-441.52 241.7,-449.71"/>
+<polygon fill="gray" stroke="gray" points="241.12,-446.25 232.22,-451.98 242.76,-453.05 241.12,-446.25"/>
+<text text-anchor="middle" x="416.44" y="-344.6" font-family="Times,serif" font-size="14.00">Load Recommendations</text>
+</g>
+<!-- AzureML -->
+<g id="node8" class="node">
+<title>AzureML</title>
+<polygon fill="#ffd6a5" stroke="black" points="198.3,-367.2 15.7,-367.2 15.7,-330.4 198.3,-330.4 198.3,-367.2"/>
+<text text-anchor="middle" x="107" y="-352.4" font-family="Segoe UI" font-size="12.00">Azure Machine Learning</text>
+<text text-anchor="middle" x="107" y="-338" font-family="Segoe UI" font-size="12.00">(ALS Training &amp; Batch Inference)</text>
+</g>
+<!-- Synapse&#45;&gt;AzureML -->
+<g id="edge6" class="edge">
+<title>Synapse-&gt;AzureML</title>
+<path fill="none" stroke="black" d="M153.41,-442.61C144.75,-425.3 131.25,-398.3 121.04,-377.88"/>
+<polygon fill="black" stroke="black" points="124.18,-376.33 116.57,-368.95 117.92,-379.46 124.18,-376.33"/>
+<text text-anchor="middle" x="180.16" y="-412.2" font-family="Times,serif" font-size="14.00">Feature Data</text>
+</g>
+<!-- PowerBI -->
+<g id="node10" class="node">
+<title>PowerBI</title>
+<polygon fill="#fde293" stroke="black" points="641.48,-367.2 502.52,-367.2 502.52,-330.4 641.48,-330.4 641.48,-367.2"/>
+<text text-anchor="middle" x="572" y="-352.4" font-family="Segoe UI" font-size="12.00">Power BI</text>
+<text text-anchor="middle" x="572" y="-338" font-family="Segoe UI" font-size="12.00">(CTR, conversion rate,...)</text>
+</g>
+<!-- Synapse&#45;&gt;PowerBI -->
+<g id="edge10" class="edge">
+<title>Synapse-&gt;PowerBI</title>
+<path fill="none" stroke="#f2c811" d="M231.11,-454.57C298.51,-447.77 402.99,-432.63 488,-400 505.43,-393.31 523.38,-383.11 538.19,-373.65"/>
+<polygon fill="#f2c811" stroke="#f2c811" points="539.73,-376.82 546.17,-368.41 535.89,-370.97 539.73,-376.82"/>
+<text text-anchor="middle" x="521.65" y="-412.2" font-family="Times,serif" font-size="14.00">Analytics Dashboard</text>
+</g>
+<!-- AzureML&#45;&gt;ADLS -->
+<g id="edge8" class="edge">
+<title>AzureML-&gt;ADLS</title>
+<path fill="none" stroke="gray" stroke-dasharray="5,2" d="M114.78,-330.09C121.02,-318.18 130.99,-303.29 144.61,-295.6 163.72,-284.82 221.97,-293.83 243,-287.6 263.15,-281.63 283.88,-270.96 300.64,-260.98"/>
+<polygon fill="gray" stroke="gray" points="302.04,-264.23 308.73,-256.02 298.38,-258.27 302.04,-264.23"/>
+<text text-anchor="middle" x="210.31" y="-299.8" font-family="Times,serif" font-size="14.00">Batch Inference Output</text>
+</g>
+<!-- ModelRegistry -->
+<g id="node9" class="node">
+<title>ModelRegistry</title>
+<polygon fill="#ffd6a5" stroke="black" points="173.5,-254.8 82.5,-254.8 82.5,-218 173.5,-218 173.5,-254.8"/>
+<text text-anchor="middle" x="128" y="-240" font-family="Segoe UI" font-size="12.00">Azure ML</text>
+<text text-anchor="middle" x="128" y="-225.6" font-family="Segoe UI" font-size="12.00">Model Registry</text>
+</g>
+<!-- AzureML&#45;&gt;ModelRegistry -->
+<g id="edge7" class="edge">
+<title>AzureML-&gt;ModelRegistry</title>
+<path fill="none" stroke="black" d="M54.3,-329.99C38.54,-321.5 27.32,-310.02 35.29,-295.6 43.67,-280.46 57.81,-268.72 72.56,-259.89"/>
+<polygon fill="black" stroke="black" points="73.92,-263.14 80.97,-255.23 70.52,-257.02 73.92,-263.14"/>
+<text text-anchor="middle" x="78.65" y="-299.8" font-family="Times,serif" font-size="14.00">Register Model</text>
+</g>
+<!-- Redis -->
+<g id="node11" class="node">
+<title>Redis</title>
+<polygon fill="#e0bbe4" stroke="black" points="637.32,-142.4 528.68,-142.4 528.68,-105.6 637.32,-105.6 637.32,-142.4"/>
+<text text-anchor="middle" x="583" y="-127.6" font-family="Segoe UI" font-size="12.00">Azure Redis Cache</text>
+<text text-anchor="middle" x="583" y="-113.2" font-family="Segoe UI" font-size="12.00">(Vector Cache)</text>
+</g>
+<!-- ModelRegistry&#45;&gt;Redis -->
+<g id="edge11" class="edge">
+<title>ModelRegistry-&gt;Redis</title>
+<path fill="none" stroke="#800080" d="M173.71,-224.31C254.7,-204.66 423.65,-163.66 517.18,-140.97"/>
+<polygon fill="#800080" stroke="#800080" points="517.83,-144.41 526.73,-138.65 516.18,-137.61 517.83,-144.41"/>
+<text text-anchor="middle" x="374.71" y="-187.4" font-family="Times,serif" font-size="14.00">Push Cache</text>
+</g>
+<!-- OnlineAPI -->
+<g id="node12" class="node">
+<title>OnlineAPI</title>
+<polygon fill="#e0bbe4" stroke="black" points="708.64,-52.8 525.36,-52.8 525.36,-16 708.64,-16 708.64,-52.8"/>
+<text text-anchor="middle" x="617" y="-38" font-family="Segoe UI" font-size="12.00">Azure Function / API</text>
+<text text-anchor="middle" x="617" y="-23.6" font-family="Segoe UI" font-size="12.00">(Online Recommendation Service)</text>
+</g>
+<!-- Redis&#45;&gt;OnlineAPI -->
+<g id="edge12" class="edge">
+<title>Redis-&gt;OnlineAPI</title>
+<path fill="none" stroke="#800080" d="M589.88,-105.27C594.53,-93.28 600.78,-77.19 606.11,-63.47"/>
+<polygon fill="#800080" stroke="#800080" points="609.23,-65.1 609.58,-54.51 602.7,-62.57 609.23,-65.1"/>
+<text text-anchor="middle" x="663.69" y="-75" font-family="Times,serif" font-size="14.00">Low Latency Lookup</text>
+</g>
+<!-- OnlineAPI&#45;&gt;App -->
+<g id="edge13" class="edge">
+<title>OnlineAPI-&gt;App</title>
+<path fill="none" stroke="#800080" d="M709.06,-49.41C782.1,-63.21 872,-87.42 872,-123 872,-558 872,-558 872,-558 872,-579.76 872.46,-604.11 872.94,-623.59"/>
+<polygon fill="#800080" stroke="#800080" points="869.44,-623.6 873.19,-633.51 876.43,-623.42 869.44,-623.6"/>
+<text text-anchor="middle" x="935.96" y="-344.6" font-family="Times,serif" font-size="14.00">Get Recommendations</text>
+</g>
+</g>
+</svg>
