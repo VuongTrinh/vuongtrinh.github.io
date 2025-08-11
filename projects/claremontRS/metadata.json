@@ -1,7 +1,7 @@
 {
   "name": "Claremont Recommendation System",
   "seq_no": 4,
-  "imageFile": "claremontRS.svg",
+  "imageFile": "claremontRS-2.svg",
   "tags": ["Azure", "Multi-Tenancy", "Azure Function", "Azure Event Hub", "Azure Stream Analytics", "ADLS", "Azure Synapse Analytics", "Azure Machine Learning", "Azure Redis Cache", "Machine Learning", "Recommendation System", "ALS"],
   "tabs": [
     { "title": "Project Overview", "file": "README.md" },
