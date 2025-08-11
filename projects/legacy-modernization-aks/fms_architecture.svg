@@ -1,0 +1,235 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1357pt" height="1024pt" viewBox="0.00 0.00 1356.52 1023.60">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(36 987.6)">
+<title>facilities_mgmt</title>
+<polygon fill="white" stroke="none" points="-36,36 -36,-987.6 1320.52,-987.6 1320.52,36 -36,36"/>
+<g id="clust1" class="cluster">
+<title>cluster_customers</title>
+<polygon fill="none" stroke="gray" stroke-dasharray="5,2" points="36.52,-845.2 36.52,-943.6 952.52,-943.6 952.52,-845.2 36.52,-845.2"/>
+<text text-anchor="middle" x="494.52" y="-927" font-family="Times,serif" font-size="14.00" fill="gray">Customers</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_hub</title>
+<polygon fill="none" stroke="blue" stroke-dasharray="5,2" points="304.52,-557.2 304.52,-797.2 896.52,-797.2 896.52,-557.2 304.52,-557.2"/>
+<text text-anchor="middle" x="600.52" y="-780.6" font-family="Times,serif" font-size="14.00">Hub VNet</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_spoke</title>
+<polygon fill="none" stroke="blue" stroke-dasharray="5,2" points="36.52,-8 36.52,-509.2 1276.52,-509.2 1276.52,-8 36.52,-8"/>
+<text text-anchor="middle" x="656.52" y="-492.6" font-family="Times,serif" font-size="14.00">Spoke VNet - Facilities Mgmt System</text>
+</g>
+<!-- b2b -->
+<g id="node1" class="node">
+<title>b2b</title>
+<path fill="#1f4e79" stroke="black" stroke-width="1.2" d="M284.52,-910.8C284.52,-910.8 56.52,-910.8 56.52,-910.8 50.52,-910.8 44.52,-904.8 44.52,-898.8 44.52,-898.8 44.52,-865.2 44.52,-865.2 44.52,-859.2 50.52,-853.2 56.52,-853.2 56.52,-853.2 284.52,-853.2 284.52,-853.2 290.52,-853.2 296.52,-859.2 296.52,-865.2 296.52,-865.2 296.52,-898.8 296.52,-898.8 296.52,-904.8 290.52,-910.8 284.52,-910.8"/>
+<text text-anchor="middle" x="170.52" y="-885.3" font-family="Segoe UI" font-size="11.00" fill="white">Enterprise Tenants with Subscription</text>
+<text text-anchor="middle" x="170.52" y="-872.1" font-family="Segoe UI" font-size="11.00" fill="white">via Private Endpoints</text>
+</g>
+<!-- pe -->
+<g id="node7" class="node">
+<title>pe</title>
+<path fill="#4b8bbe" stroke="black" stroke-width="1.2" d="M284.52,-476.4C284.52,-476.4 56.52,-476.4 56.52,-476.4 50.52,-476.4 44.52,-470.4 44.52,-464.4 44.52,-464.4 44.52,-430.8 44.52,-430.8 44.52,-424.8 50.52,-418.8 56.52,-418.8 56.52,-418.8 284.52,-418.8 284.52,-418.8 290.52,-418.8 296.52,-424.8 296.52,-430.8 296.52,-430.8 296.52,-464.4 296.52,-464.4 296.52,-470.4 290.52,-476.4 284.52,-476.4"/>
+<text text-anchor="middle" x="170.52" y="-444.3" font-family="Segoe UI" font-size="11.00" fill="white">Azure Private Link Service</text>
+</g>
+<!-- b2b&#45;&gt;pe -->
+<g id="edge3" class="edge">
+<title>b2b-&gt;pe</title>
+<path fill="none" stroke="#1f4e79" d="M145.36,-853.06C106.97,-808.32 35.38,-716.12 8.52,-622.8 0.46,-594.78 -5.2,-582.92 8.52,-557.2 26.07,-524.31 58.48,-499.63 89.73,-482.17"/>
+<polygon fill="#1f4e79" stroke="#1f4e79" points="91.33,-485.29 98.48,-477.47 88.02,-479.12 91.33,-485.29"/>
+<text text-anchor="middle" x="70.63" y="-661.8" font-family="Segoe UI" font-size="10.00" fill="#1f4e79">HTTPS (Private Link)</text>
+</g>
+<!-- private_zone -->
+<g id="node14" class="node">
+<title>private_zone</title>
+<path fill="#1e90ff" stroke="black" stroke-width="1.2" d="M284.52,-622.8C284.52,-622.8 56.52,-622.8 56.52,-622.8 50.52,-622.8 44.52,-616.8 44.52,-610.8 44.52,-610.8 44.52,-577.2 44.52,-577.2 44.52,-571.2 50.52,-565.2 56.52,-565.2 56.52,-565.2 284.52,-565.2 284.52,-565.2 290.52,-565.2 296.52,-571.2 296.52,-577.2 296.52,-577.2 296.52,-610.8 296.52,-610.8 296.52,-616.8 290.52,-622.8 284.52,-622.8"/>
+<text text-anchor="middle" x="170.52" y="-597.3" font-family="Segoe UI" font-size="11.00" fill="white">Private DNS Zone</text>
+<text text-anchor="middle" x="170.52" y="-584.1" font-family="Segoe UI" font-size="11.00" fill="white">privatelink.{region}.azmk8s.io</text>
+</g>
+<!-- b2b&#45;&gt;private_zone -->
+<g id="edge1" class="edge">
+<title>b2b-&gt;private_zone</title>
+<path fill="none" stroke="#1f4e79" d="M170.52,-852.79C170.52,-801.51 170.52,-692.88 170.52,-634.34"/>
+<polygon fill="#1f4e79" stroke="#1f4e79" points="174.02,-634.51 170.52,-624.51 167.02,-634.51 174.02,-634.51"/>
+<text text-anchor="middle" x="194.27" y="-732.6" font-family="Segoe UI" font-size="10.00" fill="#1f4e79">DNS Query</text>
+</g>
+<!-- b2c -->
+<g id="node2" class="node">
+<title>b2c</title>
+<path fill="#2f6eb9" stroke="black" stroke-width="1.2" d="M932.52,-910.8C932.52,-910.8 704.52,-910.8 704.52,-910.8 698.52,-910.8 692.52,-904.8 692.52,-898.8 692.52,-898.8 692.52,-865.2 692.52,-865.2 692.52,-859.2 698.52,-853.2 704.52,-853.2 704.52,-853.2 932.52,-853.2 932.52,-853.2 938.52,-853.2 944.52,-859.2 944.52,-865.2 944.52,-865.2 944.52,-898.8 944.52,-898.8 944.52,-904.8 938.52,-910.8 932.52,-910.8"/>
+<text text-anchor="middle" x="818.52" y="-878.7" font-family="Segoe UI" font-size="11.00" fill="white">Public Tenants</text>
+</g>
+<!-- firewall -->
+<g id="node6" class="node">
+<title>firewall</title>
+<path fill="#d9534f" stroke="black" stroke-width="1.2" d="M876.52,-622.8C876.52,-622.8 648.52,-622.8 648.52,-622.8 642.52,-622.8 636.52,-616.8 636.52,-610.8 636.52,-610.8 636.52,-577.2 636.52,-577.2 636.52,-571.2 642.52,-565.2 648.52,-565.2 648.52,-565.2 876.52,-565.2 876.52,-565.2 882.52,-565.2 888.52,-571.2 888.52,-577.2 888.52,-577.2 888.52,-610.8 888.52,-610.8 888.52,-616.8 882.52,-622.8 876.52,-622.8"/>
+<text text-anchor="middle" x="762.52" y="-590.7" font-family="Segoe UI" font-size="11.00" fill="white">Azure Firewall Subnet</text>
+</g>
+<!-- b2c&#45;&gt;firewall -->
+<g id="edge4" class="edge">
+<title>b2c-&gt;firewall</title>
+<path fill="none" stroke="#2f6eb9" d="M871.94,-852.79C892.32,-838.99 913.33,-820.32 924.52,-797.2 942.03,-761.04 943.2,-742.37 924.52,-706.8 906.53,-672.52 872.74,-646.69 840.66,-628.54"/>
+<polygon fill="#2f6eb9" stroke="#2f6eb9" points="842.56,-625.59 832.1,-623.88 839.21,-631.74 842.56,-625.59"/>
+<text text-anchor="middle" x="990.45" y="-732.6" font-family="Segoe UI" font-size="10.00" fill="#2f6eb9">HTTPS (Public via WAF)</text>
+</g>
+<!-- hybrid -->
+<g id="node3" class="node">
+<title>hybrid</title>
+<path fill="#3a9ca7" stroke="black" stroke-width="1.2" d="M608.52,-910.8C608.52,-910.8 380.52,-910.8 380.52,-910.8 374.52,-910.8 368.52,-904.8 368.52,-898.8 368.52,-898.8 368.52,-865.2 368.52,-865.2 368.52,-859.2 374.52,-853.2 380.52,-853.2 380.52,-853.2 608.52,-853.2 608.52,-853.2 614.52,-853.2 620.52,-859.2 620.52,-865.2 620.52,-865.2 620.52,-898.8 620.52,-898.8 620.52,-904.8 614.52,-910.8 608.52,-910.8"/>
+<text text-anchor="middle" x="494.52" y="-878.7" font-family="Segoe UI" font-size="11.00" fill="white">On-Prem Tenants</text>
+</g>
+<!-- dns_fwd -->
+<g id="node4" class="node">
+<title>dns_fwd</title>
+<path fill="#6a5acd" stroke="black" stroke-width="1.2" d="M552.52,-764.4C552.52,-764.4 324.52,-764.4 324.52,-764.4 318.52,-764.4 312.52,-758.4 312.52,-752.4 312.52,-752.4 312.52,-718.8 312.52,-718.8 312.52,-712.8 318.52,-706.8 324.52,-706.8 324.52,-706.8 552.52,-706.8 552.52,-706.8 558.52,-706.8 564.52,-712.8 564.52,-718.8 564.52,-718.8 564.52,-752.4 564.52,-752.4 564.52,-758.4 558.52,-764.4 552.52,-764.4"/>
+<text text-anchor="middle" x="438.52" y="-732.3" font-family="Segoe UI" font-size="11.00" fill="white">Private Resolver</text>
+</g>
+<!-- hybrid&#45;&gt;dns_fwd -->
+<g id="edge6" class="edge">
+<title>hybrid-&gt;dns_fwd</title>
+<path fill="none" stroke="#3a9ca7" d="M483.59,-852.82C475.04,-830.75 463.04,-799.82 453.58,-775.41"/>
+<polygon fill="#3a9ca7" stroke="#3a9ca7" points="456.85,-774.18 449.97,-766.12 450.33,-776.71 456.85,-774.18"/>
+<text text-anchor="middle" x="521.94" y="-808.2" font-family="Segoe UI" font-size="10.00" fill="#3a9ca7">DNS Query (*.privatelink)</text>
+</g>
+<!-- gateway -->
+<g id="node5" class="node">
+<title>gateway</title>
+<path fill="#2f6eb9" stroke="black" stroke-width="1.2" d="M876.52,-764.4C876.52,-764.4 648.52,-764.4 648.52,-764.4 642.52,-764.4 636.52,-758.4 636.52,-752.4 636.52,-752.4 636.52,-718.8 636.52,-718.8 636.52,-712.8 642.52,-706.8 648.52,-706.8 648.52,-706.8 876.52,-706.8 876.52,-706.8 882.52,-706.8 888.52,-712.8 888.52,-718.8 888.52,-718.8 888.52,-752.4 888.52,-752.4 888.52,-758.4 882.52,-764.4 876.52,-764.4"/>
+<text text-anchor="middle" x="762.52" y="-732.3" font-family="Segoe UI" font-size="11.00" fill="white">Gateway Subnet</text>
+</g>
+<!-- hybrid&#45;&gt;gateway -->
+<g id="edge7" class="edge">
+<title>hybrid-&gt;gateway</title>
+<path fill="none" stroke="#3a9ca7" d="M546.83,-852.82C590.83,-829.11 653.82,-795.17 700.38,-770.08"/>
+<polygon fill="#3a9ca7" stroke="#3a9ca7" points="701.87,-773.26 709.01,-765.43 698.55,-767.09 701.87,-773.26"/>
+<text text-anchor="middle" x="656.3" y="-808.2" font-family="Segoe UI" font-size="10.00" fill="#3a9ca7">ExpressRoute</text>
+</g>
+<!-- dns_fwd&#45;&gt;private_zone -->
+<g id="edge8" class="edge">
+<title>dns_fwd-&gt;private_zone</title>
+<path fill="none" stroke="#3a9ca7" d="M384.29,-706.35C341.06,-683.83 280.42,-652.25 234.77,-628.46"/>
+<polygon fill="#3a9ca7" stroke="#3a9ca7" points="236.51,-625.42 226.02,-623.91 233.27,-631.63 236.51,-625.42"/>
+<text text-anchor="middle" x="360.75" y="-661.8" font-family="Segoe UI" font-size="10.00" fill="#3a9ca7">Conditional Forwarding</text>
+</g>
+<!-- gateway&#45;&gt;firewall -->
+<g id="edge9" class="edge">
+<title>gateway-&gt;firewall</title>
+<path fill="none" stroke="#3a9ca7" d="M762.52,-706.35C762.52,-685.73 762.52,-657.49 762.52,-634.61"/>
+<polygon fill="#3a9ca7" stroke="#3a9ca7" points="766.02,-634.72 762.52,-624.72 759.02,-634.72 766.02,-634.72"/>
+</g>
+<!-- apim -->
+<g id="node8" class="node">
+<title>apim</title>
+<path fill="#2f6eb9" stroke="black" stroke-width="1.2" d="M876.52,-334.8C876.52,-334.8 648.52,-334.8 648.52,-334.8 642.52,-334.8 636.52,-328.8 636.52,-322.8 636.52,-322.8 636.52,-289.2 636.52,-289.2 636.52,-283.2 642.52,-277.2 648.52,-277.2 648.52,-277.2 876.52,-277.2 876.52,-277.2 882.52,-277.2 888.52,-283.2 888.52,-289.2 888.52,-289.2 888.52,-322.8 888.52,-322.8 888.52,-328.8 882.52,-334.8 876.52,-334.8"/>
+<text text-anchor="middle" x="762.52" y="-309.3" font-family="Segoe UI" font-size="11.00" fill="white">Azure API Management</text>
+<text text-anchor="middle" x="762.52" y="-296.1" font-family="Segoe UI" font-size="11.00" fill="white">(Tenant Resolution + Routing)</text>
+</g>
+<!-- firewall&#45;&gt;apim -->
+<g id="edge5" class="edge">
+<title>firewall-&gt;apim</title>
+<path fill="none" stroke="#2f6eb9" d="M745.61,-564.79C732.98,-513.4 732.21,-404.43 743.29,-345.98"/>
+<polygon fill="#2f6eb9" stroke="#2f6eb9" points="746.65,-346.99 745.35,-336.47 739.81,-345.51 746.65,-346.99"/>
+</g>
+<!-- firewall&#45;&gt;apim -->
+<g id="edge10" class="edge">
+<title>firewall-&gt;apim</title>
+<path fill="none" stroke="#3a9ca7" d="M779.43,-564.79C792.06,-513.4 792.84,-404.43 781.76,-345.98"/>
+<polygon fill="#3a9ca7" stroke="#3a9ca7" points="785.23,-345.51 779.7,-336.47 778.39,-346.99 785.23,-345.51"/>
+</g>
+<!-- pe&#45;&gt;apim -->
+<g id="edge11" class="edge">
+<title>pe-&gt;apim</title>
+<path fill="none" stroke="#1f4e79" d="M290.32,-418.35C389.34,-395 529.72,-361.9 631.66,-337.86"/>
+<polygon fill="#1f4e79" stroke="#1f4e79" points="632.25,-341.32 641.18,-335.62 630.64,-334.5 632.25,-341.32"/>
+<text text-anchor="middle" x="518.71" y="-373.8" font-family="Segoe UI" font-size="10.00">Internal API Call</text>
+</g>
+<!-- aks -->
+<g id="node9" class="node">
+<title>aks</title>
+<path fill="#0078d4" stroke="black" stroke-width="1.2" d="M876.52,-204.2C876.52,-204.2 648.52,-204.2 648.52,-204.2 642.52,-204.2 636.52,-198.2 636.52,-192.2 636.52,-192.2 636.52,-158.6 636.52,-158.6 636.52,-152.6 642.52,-146.6 648.52,-146.6 648.52,-146.6 876.52,-146.6 876.52,-146.6 882.52,-146.6 888.52,-152.6 888.52,-158.6 888.52,-158.6 888.52,-192.2 888.52,-192.2 888.52,-198.2 882.52,-204.2 876.52,-204.2"/>
+<text text-anchor="middle" x="762.52" y="-178.7" font-family="Segoe UI" font-size="11.00" fill="white">Azure Kubernetes Cluster</text>
+<text text-anchor="middle" x="762.52" y="-165.5" font-family="Segoe UI" font-size="11.00" fill="white">(Microservices)</text>
+</g>
+<!-- apim&#45;&gt;aks -->
+<g id="edge12" class="edge">
+<title>apim-&gt;aks</title>
+<path fill="none" stroke="black" d="M762.52,-276.78C762.52,-258.94 762.52,-235.62 762.52,-215.95"/>
+<polygon fill="black" stroke="black" points="766.02,-216.07 762.52,-206.07 759.02,-216.07 766.02,-216.07"/>
+</g>
+<!-- db -->
+<g id="node10" class="node">
+<title>db</title>
+<path fill="#3c9d37" stroke="black" stroke-width="1.2" d="M284.52,-73.6C284.52,-73.6 56.52,-73.6 56.52,-73.6 50.52,-73.6 44.52,-67.6 44.52,-61.6 44.52,-61.6 44.52,-28 44.52,-28 44.52,-22 50.52,-16 56.52,-16 56.52,-16 284.52,-16 284.52,-16 290.52,-16 296.52,-22 296.52,-28 296.52,-28 296.52,-61.6 296.52,-61.6 296.52,-67.6 290.52,-73.6 284.52,-73.6"/>
+<text text-anchor="middle" x="170.52" y="-48.1" font-family="Segoe UI" font-size="11.00" fill="white">Cosmos DB for PostgreSQL</text>
+<text text-anchor="middle" x="170.52" y="-34.9" font-family="Segoe UI" font-size="11.00" fill="white">(RLS + Sharding)</text>
+</g>
+<!-- aks&#45;&gt;db -->
+<g id="edge13" class="edge">
+<title>aks-&gt;db</title>
+<path fill="none" stroke="black" d="M636.25,-146.97C539.78,-126.01 406.97,-97.16 307.86,-75.63"/>
+<polygon fill="black" stroke="black" points="308.85,-72.27 298.34,-73.56 307.37,-79.11 308.85,-72.27"/>
+</g>
+<!-- storage -->
+<g id="node11" class="node">
+<title>storage</title>
+<path fill="#3c9d37" stroke="black" stroke-width="1.2" d="M608.52,-73.6C608.52,-73.6 380.52,-73.6 380.52,-73.6 374.52,-73.6 368.52,-67.6 368.52,-61.6 368.52,-61.6 368.52,-28 368.52,-28 368.52,-22 374.52,-16 380.52,-16 380.52,-16 608.52,-16 608.52,-16 614.52,-16 620.52,-22 620.52,-28 620.52,-28 620.52,-61.6 620.52,-61.6 620.52,-67.6 614.52,-73.6 608.52,-73.6"/>
+<text text-anchor="middle" x="494.52" y="-48.1" font-family="Segoe UI" font-size="11.00" fill="white">Azure Blob Storage</text>
+<text text-anchor="middle" x="494.52" y="-34.9" font-family="Segoe UI" font-size="11.00" fill="white">(Tenant-Isolated)</text>
+</g>
+<!-- aks&#45;&gt;storage -->
+<g id="edge14" class="edge">
+<title>aks-&gt;storage</title>
+<path fill="none" stroke="black" d="M703.71,-146.18C662.34,-126.33 606.84,-99.7 563.4,-78.85"/>
+<polygon fill="black" stroke="black" points="565.09,-75.78 554.56,-74.61 562.07,-82.09 565.09,-75.78"/>
+</g>
+<!-- keyvault -->
+<g id="node12" class="node">
+<title>keyvault</title>
+<path fill="#3c9d37" stroke="black" stroke-width="1.2" d="M932.52,-73.6C932.52,-73.6 704.52,-73.6 704.52,-73.6 698.52,-73.6 692.52,-67.6 692.52,-61.6 692.52,-61.6 692.52,-28 692.52,-28 692.52,-22 698.52,-16 704.52,-16 704.52,-16 932.52,-16 932.52,-16 938.52,-16 944.52,-22 944.52,-28 944.52,-28 944.52,-61.6 944.52,-61.6 944.52,-67.6 938.52,-73.6 932.52,-73.6"/>
+<text text-anchor="middle" x="818.52" y="-41.5" font-family="Segoe UI" font-size="11.00" fill="white">Azure Key Vault</text>
+</g>
+<!-- aks&#45;&gt;keyvault -->
+<g id="edge15" class="edge">
+<title>aks-&gt;keyvault</title>
+<path fill="none" stroke="black" d="M774.81,-146.18C782.73,-128 793.12,-104.14 801.78,-84.24"/>
+<polygon fill="black" stroke="black" points="804.88,-85.91 805.66,-75.34 798.46,-83.11 804.88,-85.91"/>
+</g>
+<!-- monitor -->
+<g id="node13" class="node">
+<title>monitor</title>
+<path fill="#3c9d37" stroke="black" stroke-width="1.2" d="M1256.52,-73.6C1256.52,-73.6 1028.52,-73.6 1028.52,-73.6 1022.52,-73.6 1016.52,-67.6 1016.52,-61.6 1016.52,-61.6 1016.52,-28 1016.52,-28 1016.52,-22 1022.52,-16 1028.52,-16 1028.52,-16 1256.52,-16 1256.52,-16 1262.52,-16 1268.52,-22 1268.52,-28 1268.52,-28 1268.52,-61.6 1268.52,-61.6 1268.52,-67.6 1262.52,-73.6 1256.52,-73.6"/>
+<text text-anchor="middle" x="1142.52" y="-41.5" font-family="Segoe UI" font-size="11.00" fill="white">Azure Monitor</text>
+</g>
+<!-- aks&#45;&gt;monitor -->
+<g id="edge16" class="edge">
+<title>aks-&gt;monitor</title>
+<path fill="none" stroke="black" d="M845.92,-146.18C905.71,-125.94 986.32,-98.66 1048.41,-77.65"/>
+<polygon fill="black" stroke="black" points="1049.21,-81.07 1057.56,-74.55 1046.97,-74.44 1049.21,-81.07"/>
+</g>
+<!-- private_zone&#45;&gt;pe -->
+<g id="edge2" class="edge">
+<title>private_zone-&gt;pe</title>
+<path fill="none" stroke="#1f4e79" d="M170.52,-564.82C170.52,-542.95 170.52,-512.37 170.52,-488.07"/>
+<polygon fill="#1f4e79" stroke="#1f4e79" points="174.02,-488.23 170.52,-478.23 167.02,-488.23 174.02,-488.23"/>
+<text text-anchor="middle" x="193.72" y="-520.2" font-family="Segoe UI" font-size="10.00" fill="#1f4e79">Resolves to</text>
+</g>
+<!-- Hub -->
+<g id="node15" class="node">
+<title>Hub</title>
+<path fill="lightgrey" stroke="black" d="M1058.52,-900C1058.52,-900 1028.52,-900 1028.52,-900 1022.52,-900 1016.52,-894 1016.52,-888 1016.52,-888 1016.52,-876 1016.52,-876 1016.52,-870 1022.52,-864 1028.52,-864 1028.52,-864 1058.52,-864 1058.52,-864 1064.52,-864 1070.52,-870 1070.52,-876 1070.52,-876 1070.52,-888 1070.52,-888 1070.52,-894 1064.52,-900 1058.52,-900"/>
+<text text-anchor="middle" x="1043.52" y="-878.7" font-family="Segoe UI" font-size="11.00">Hub</text>
+</g>
+<!-- Spoke -->
+<g id="node16" class="node">
+<title>Spoke</title>
+<path fill="lightgrey" stroke="black" d="M1256.52,-900C1256.52,-900 1226.52,-900 1226.52,-900 1220.52,-900 1214.52,-894 1214.52,-888 1214.52,-888 1214.52,-876 1214.52,-876 1214.52,-870 1220.52,-864 1226.52,-864 1226.52,-864 1256.52,-864 1256.52,-864 1262.52,-864 1268.52,-870 1268.52,-876 1268.52,-876 1268.52,-888 1268.52,-888 1268.52,-894 1262.52,-900 1256.52,-900"/>
+<text text-anchor="middle" x="1241.52" y="-878.7" font-family="Segoe UI" font-size="11.00">Spoke</text>
+</g>
+<!-- Hub&#45;&gt;Spoke -->
+<g id="edge17" class="edge">
+<title>Hub-&gt;Spoke</title>
+<path fill="none" stroke="gray" stroke-dasharray="5,2" d="M1081.99,-882C1116.87,-882 1168.01,-882 1202.93,-882"/>
+<polygon fill="gray" stroke="gray" points="1082.15,-878.5 1072.15,-882 1082.15,-885.5 1082.15,-878.5"/>
+<polygon fill="gray" stroke="gray" points="1202.59,-885.5 1212.59,-882 1202.59,-878.5 1202.59,-885.5"/>
+<text text-anchor="middle" x="1142.52" y="-888" font-family="Segoe UI" font-size="10.00" fill="gray">VNet Peering</text>
+</g>
+</g>
+</svg>
