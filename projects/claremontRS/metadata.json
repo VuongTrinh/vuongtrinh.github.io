@@ -6,7 +6,7 @@
   "tabs": [
     { "title": "Project Overview", "file": "README.md" },
     { "title": "Technical Highlights", "file": "README_TechnicalHighlights.md", "hash": "claremontRS-technicalhighlights" },
-    { "title": "Machine Learning", "file": "README_ML.md" },
+    { "title": "Machine Learning", "file": "README_ML.md", "hash": "claremontRS-ml" },
     { "title": "Achievements", "file": "README_Achievements.md" }
   ]
 }
