@@ -2,7 +2,7 @@
   "name": "Legacy Modernization with Azure Kubernetes Service",
   "seq_no": 3,
   "imageFile": "fms_architecture.svg",
-  "tags": ["Azure", "Kubernetes", "Multi-Tenancy", "GitOps", "Event-driven", "Microservices", "Domain-driven Design", "API-first", "Azure Private Link", "Azure Application Gateway", "Azure API Management", "Azure Cosmos DB", "PostgreSQL", "Azure Managed Application", "Azure Service Bus", "Azure Event Grid", "Azure Function", "Azure Monitor", "Azure KeyVault"],
+  "tags": ["Azure", "Kubernetes", "Multi-Tenancy", "GitOps", "Event-driven", "Microservices", "Domain-driven Design", "API-first", "Azure Private Link", "Azure Application Gateway", "Azure API Management", "Azure Cosmos DB", "PostgreSQL", "Azure Managed Application", "Azure Service Bus", "Azure Event Grid", "Azure Function", "Azure Monitor", "Azure KeyVault", "Azure DNS", "Hub/Spoke"],
   "tabs": [
     { "title": "Project Overview", "file": "README.md" },
     { "title": "Solution Architecture", "file": "README_Architecture.md" },
