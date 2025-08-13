@@ -6,11 +6,13 @@
   "tabs": [
     {
       "title": "Project Overview",
-      "file": "README.md"
+      "file": "README.md",
+      "hash": "iotedgerealtimeobjectdetection-overview"
     },
     {
       "title": "Architecture",
-      "file": "README_Architecture.md"
+      "file": "README_Architecture.md",
+      "hash": "iotedgerealtimeobjectdetection-architecture"
     },
     {
       "title": "Machine Learning Solutions",
