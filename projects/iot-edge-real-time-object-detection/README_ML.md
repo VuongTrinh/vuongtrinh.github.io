@@ -1,53 +1,113 @@
-This solution implements a full MLOps pipeline using **Azure Machine Learning** to retrain, evaluate, and deploy updated YOLO-based models for mask detection at the edge. The pipeline is tightly integrated with the edge architecture and supports continuous model improvement with robust monitoring and rollback.
+# Workplace Compliance AI Edge Solution
+## 1. Project Overview
+**Objective:**  
+Develop a low-latency AI solution to monitor workplace compliance behaviors (e.g., mask wearing) using real-time video streams at the edge. The system must support:
+- Edge-based inference for latency-sensitive detection
+- Centralized model training and evaluation
+- Multi-camera, multi-tenant deployment
+- Secure, scalable Azure Arc-based deployment
 
-## MLOps Architecture Components
+## 2. Problem Formulation
+### Task Type
+- **Classification (Binary/Multiclass):** Mask vs No-Mask
+- **Object Detection (YOLO):** Localize people and detect compliance in real-time
+### Target Output
+- Bounding boxes with class labels (e.g., `person`, `mask`, `no-mask`)
+- Confidence scores
 
-| Component                            | Role                                          |
-| --------------------------------     | --------------------------------------------- |
-| **Azure ML Pipelines**               | Automate retraining steps                     |
-| **Model Registry**                   | Track versions and metadata                   |
-| **Azure DevOps**                     | CI/CD for retraining pipeline                 |
-| **Azure Container Registry**         | Store YOLO inference containers               |
-| **Arc-enabled Kubernetes**           | Hosts edge inference containers               |
-| **Azure Monitor**                    | Monitor inference performance and model drift |
-| **Azure Data Lake Storage Gen2**     | Store datasets, outputs, and logs             |
+## 3. Data Preparation
+### 🛠️ Preprocessing
+- Frame extraction (1 FPS)
+- Image resizing to 640×640
+- Label annotation in YOLO format
+### 📈 Augmentations
+- Random flip, scale, crop, color jitter, mosaic (YOLO-specific)
+- Domain randomization for synthetic data
 
-## End-to-End pipeline
+## 4. Hyperparameter Tuning
+### General Hyperparameters
 
-### 1. Data Collection from Edge
-- Inference results (`inference.results` Kafka topic) and raw video frames are stored in:
-  - **Cassandra** (structured, hot-store)
-  - **MinIO** (for video frames, labels, and backups)
-- At scheduled intervals or via event-driven pipelines, data from both Cassandra and MinIO is synchronized and ingested into **Azure Data Lake Storage Gen2**
+| Hyperparameter       | Purpose / Effect                                         |
+| -------------------- | -------------------------------------------------------- |
+| Learning rate        | Step size for gradient descent; critical for convergence |
+| Optimizer            | SGD, Adam — controls weight updates                      |
+| Batch size           | Number of images per gradient update                     |
+| Epochs               | Number of training passes over the dataset               |
+| L1/L2 regularization | Prevents overfitting; controls weight growth             |
+| Dropout rate         | Reduces overfitting by randomly zeroing activations      |
 
-### 2. Azure ML Training Pipeline
-The pipeline is orchestrated in **Azure Machine Learning** and includes:
-| Step                       | Description                                        |
-| ----------------------     | -------------------------------------------------- |
-| **Preprocessing**          | Convert labeled data into YOLOv5-compatible format |
-| **Training**               | Run YOLOv5 training using updated data             |
-| **Evaluation**             | Compute mAP, precision, recall, and loss metrics   |
-| **Model Registration**     | Register trained model in Azure ML Model Registry  |
-| **Approval Gate**          | Approvement before deployment                      |
+### YOLO-Specific Hyperparameters
 
-Retraining Triggers
-| Trigger Type            | Example                                    |
-| -------------------     | ------------------------------------------ |
-| **Scheduled**           | Weekly retraining jobs                     |
-| **Drift Detection**     | Significant drop in accuracy or confidence |
-| **Data Thresholds**     | New labeled data > N examples              |
-| **Manual**              | Human-in-the-loop retraining trigger       |
+| Hyperparameter           | Purpose / Effect                                              |
+| ------------------------ | ------------------------------------------------------------- |
+| Input image size         | Resolution affects small object detection                     |
+| Anchors per scale        | Number of predefined boxes per grid cell                      |
+| Anchor dimensions        | Width & height priors for each anchor; affects box regression |
+| Depth / width multiplier | Scale backbone & head size (YOLOv5s/m/l/x)                    |
+| NMS IoU threshold        | Determines which overlapping boxes are kept                   |
+| Objectness threshold     | Minimum confidence for predicted box                          |
+| Data augmentations       | Mosaic, flips, color jitter — improves robustness             |
 
-### 3. Model Deployment to Edge
-| Stage                      | Tool/Service                                                                               |
-| ----------------------     | ------------------------------------------------------------------------------------------ |
-| **Packaging**              | Build inference container using latest YOLO model                                          |
-| **Container Registry**     | Push image to Azure Container Registry (ACR)                                               |
-| **Edge Deployment**        | Use **Azure Arc** + **GitOps** or Azure ML Edge deployments to roll out to remote clusters |
-| **Canary Rollout**         | Deploy to test pods/namespaces before cluster-wide rollout                                 |
+---
 
-## 4. Monitoring the Model Lifecycle
-- **Training Metrics**: Tracked in Azure ML Experiments
-- **Deployment Health**: Monitored via Azure Monitor (Arc)
-- **Inference Telemetry**: Logged in Cassandra + sent to Azure Monitor
-- **Drift Detection**: Triggered by model performance drops or data anomalies
+## 5. Experimental Design
+### Baseline
+- Pretrained YOLOv5s on COCO
+- Fine-tuned on MAFA + synthetic data
+### Model Iterations
+
+| Version | Change                         | Reason                          |
+| ------- | ------------------------------ | ------------------------------- |
+| v1      | Baseline pretrained YOLOv5s    | Establish benchmark             |
+| v2      | Add synthetic dataset          | Improve mask variation coverage |
+| v3      | Optimize anchor box dimensions | Boost detection performance     |
+| v4      | Pruned model for edge          | Fit within Jetson/Triton limits |
+| v5      | Quantized + ONNX export        | Edge deployment optimization    |
+
+## 6. Training Configuration
+
+| Item              | Setting                      |
+| ----------------- | ---------------------------- |
+| Optimizer         | SGD with momentum            |
+| Learning Rate     | One-cycle LR scheduler       |
+| Batch Size        | 16                           |
+| Epochs            | 100                          |
+| Loss Functions    | GIoU Loss, BCE, CE Loss      |
+| Early Stopping    | mAP@0.5:0.95 stagnation      |
+| Framework         | PyTorch + Ultralytics YOLOv5 |
+| Training Platform | Azure ML + GPU compute       |
+
+## 7. Metrics and Evaluation
+### Training Metrics
+- `box_loss`, `obj_loss`, `cls_loss`
+### Evaluation Metrics
+
+| Metric       | Meaning                              |
+| ------------ | ------------------------------------ |
+| mAP@0.5      | Localization + detection (IoU ≥ 0.5) |
+| mAP@0.5:0.95 | Stricter detection (COCO-style)      |
+| Precision    | True positive ratio                  |
+| Recall       | Coverage of actual positives         |
+| FPS (Edge)   | Real-time readiness check            |
+
+## 8. Edge Deployment
+### Edge Deployment
+- Containerized inference service on **Jetson/Triton devices**
+- Deployed via **K3s lightweight Kubernetes** cluster
+- Connected to **Azure Arc** for centralized monitoring, updates, and telemetry
+- Multi-tenant support and real-time video ingestion from **customer RTSP/ONVIF cameras**
+
+## 9. Risk Mitigation
+
+| Risk                          | Mitigation Strategy                         |
+| ----------------------------- | ------------------------------------------- |
+| Real-time latency >500ms      | Model pruning + quantization                |
+| Unbalanced dataset            | Synthetic data generation + class weights   |
+| Privacy & compliance          | Face anonymization + secure labeling        |
+| Drift due to new environments | Scheduled retraining with customer feedback |
+
+## 10. Future Enhancements
+- Multi-class PPE detection (hard hats, safety vests)
+- Transformer-based detection models (YOLOv8n, DETR variants)
+- Self-supervised adaptation at edge
+- Federated learning for on-device model updates
