@@ -16,7 +16,8 @@
     },
     {
       "title": "Machine Learning Solutions",
-      "file": "README_ML.md"
+      "file": "README_ML.md",
+      "hash": "iotedgerealtimeobjectdetection-ml"
     },
      { "title": "Design Outcomes",
        "file": "README_Outcomes.md" 
